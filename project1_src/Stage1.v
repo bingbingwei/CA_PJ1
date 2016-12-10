@@ -6,7 +6,7 @@ module Stage1(
 	clk_i
 );
 
-input         clk_i;
+input         clk_i, HD_i, flush_i;
 input  [31:0] inst_i;
 output [31:0] inst_o;
 
