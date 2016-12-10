@@ -28,7 +28,7 @@ always @(posedge clk_i) begin
 	MemtoReg_o_4 = MemtoReg_i_4;
 	Data1_o = Data1_i;
 	Data2_o = Data2_i;
-	Rdaddr_o = Rdaddr_o;
+	RDaddr_o = RDaddr_o;
 end
 
 endmodule

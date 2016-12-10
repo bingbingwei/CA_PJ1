@@ -24,7 +24,7 @@ assign              ZERO = 32'b0;
 wire [31:0] Stage3_data1, Reg_RSdata_output, Reg_RTdata_output;
 wire [4:0]  Stage3_RDaddr_output, Stage4_RDaddr_output;
 
-always @(Control.Jump) begin
+always @(Control.Jump_o) begin
     //注意可能會錯
     if(Control.Jump_o == 1)
       jump_address_reg <= {Add_PC_output[31:28],inst[25:0]<<2,2'b0};
@@ -198,7 +198,7 @@ Stage3 Stage3(
     //clk
     .clk_i(clk_i),
     //other 3*2
-    .Data1_i(ALU_ouput),
+    .Data1_i(ALU_output),
     .Data1_o(Stage3_data1),//four line -> use wire
     .mux7_output_data_i(mux7_output),//three line -> use wire
     .mux7_output_data_o(Data_Memory.write_data_i),
@@ -233,7 +233,7 @@ Stage2 Stage2(
     .RTdata_i(Reg_RTdata_output),//three line -> use wire
     .RTdata_o(mux7.data1_i),
     
-    .Sign_extend_i(Sign_Extend_ouput),
+    .Sign_extend_i(Sign_Extend_output),
     .Sign_extend_o(mux4.data2_i),
     
     .RSaddr_i(inst[25:21]),
@@ -259,7 +259,7 @@ Stage1 Stage1(
 	.inst_o(inst),
    .HD_i(HD_output),
    .flush_i( Jump_Output || (Branch_Output && Equal_Output)),
-   .clk
+   .clk_i
 );
 
 Hazard_Detection_Unit HD_Unit(

@@ -1,4 +1,3 @@
-
 module Stage2(
     RegWrite_i_2,
     RegWrite_o_2,
