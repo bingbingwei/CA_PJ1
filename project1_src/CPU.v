@@ -161,7 +161,7 @@ Forwarding_Unit Forwarding_Unit(
     .Regdst_i_M(Stage3_RDaddr_output),//three line -> use wire
     .RSaddr_i(Stage2.RSaddr_o),
     .RTaddr_i(Stage2_RTaddr_output),//four line -> use wire
-    .Stage4_Regwrite_i(Stage4_RegWrite_output),
+    .Stage4_RegWrite_i(Stage4_RegWrite_output),
     .Stage3_RegWrite_i(Stage3_RegWrite_output),
     .mux7_o(mux7.select_i),
     .mux6_o(mux6.select_i)
