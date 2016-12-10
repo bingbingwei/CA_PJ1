@@ -22,6 +22,16 @@ input	clk_i;
 output	RegWrite_o_2,MemtoReg_o_2,Memory_write_o_2,Memory_read_o_2,ALUSrc_o_2,RegDst_o_2;
 output	[1:0]	ALUOp_o_2;
 
+reg     RegWrite,MemtoReg,
+
+assign  RegWrite_o_2 = RegWrite;
+assign  MemtoReg_o_2 = MemtoReg;
+assign  Memory_write_o_2 = Memory_write;
+assign  Memory_read_o_2 = Memeory_read;
+assign  ALUSrc_o_2 = ALUSrc;
+assign  RegDst_o_2 = RegDst;
+assign  ALUOp_o_2 = ALUOp;
+
 always @(posedge clk_i)begin
 	assign	RegWrite_o_2 = RegWrite_i_2;
 	assign	MemtoReg_o_2 = MemtoReg_i_2;	
@@ -29,7 +39,7 @@ always @(posedge clk_i)begin
 	assign	Memory_read_o_2 = Memory_read_i_2;
 	assign	ALUSrc_o_2 = ALUSrc_i_2;
 	assign	RegDst_o_2 = RegDst_i_2;
-	assign	ALUOp_o_2 <= ALUOp_i_;
+	assign	ALUOp_o_2 <= ALUOp_i_2;
 end
 
 endmodule
