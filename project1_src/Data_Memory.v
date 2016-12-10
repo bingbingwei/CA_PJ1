@@ -1,4 +1,4 @@
-module Data_memory
+module Data_Memory
 (
 	address_i,
 	Memory_write_i,
