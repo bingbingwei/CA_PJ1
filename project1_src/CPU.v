@@ -14,19 +14,31 @@ wire                [31:0] inst_addr,inst;
 wire                [31:0] ALU_output,mux5_output,mux7_output,Sign_Extend_output;          
 wire                [4:0]  mux8_output;
 wire                Stage3_RegWrite_output,Stage4_RegWrite_output;
+wire                [31:0] ControlSignal_i,ZERO,ControlSignal_o;
+
+assign              ZERO = 32'b0;
 
 Control Control(
     .Op_i           (inst[31:26]),
     .RegDst_o       (Stage2.RegDst_i_2),
-    .ALUOp_o        (Stage2.ALUOp_i_2), //0 for R-type ; 1 for I-type
+    .ALUOp_o        (Stage2.ALUOp_i_2), //0: R-type,1: ADD;2: or,3: sub
     .ALUSrc_o       (Stage2.ALUSrc_i_2),
-    .RegWrite_o     (Registers.RegWrite_i),
     .Memory_write_o (Data_Memory.Memory_write_i),
     .Memory_read_o  (Data_Memory.Memory_read_i),
-    .MemtoReg_o     (mux5.select_i)
+    .MemtoReg_o     (mux5.select_i),
+    .RegWrite_o     (Registers.RegWrite_i)
 );
 
-
+Control_Sign_Extend Control_Sign_Extend(
+    .RegDst_i           (Control.RegDst_o),
+    .ALUOp_i            (Control.ALUOp_o),
+    .ALUSrc_i           (Control.ALUSrc_o),
+    .Memory_read_i      (Control.Memory_read_o),
+    .Memory_write_i     (Control.Memory_write_o),
+    .MemtoReg_i         (Control.MemtoReg_o),
+    .RegWrite_i         (Control.RegWrite_o),
+    .Control_Signal_o   (ControlSignal_i)
+);
 
 Adder Add_PC(
     .data1_in   (inst_addr),
@@ -131,7 +143,7 @@ MUX32v3 mux7(
     .data_o(mux7_output)
 );
 
-Forwarding_Unit(
+Forwarding_Unit Forwarding_Unit(
     .regdst_i_WB(mux8_output),
     .regdst_i_M(mux8_output),
     .RSaddr_i(inst[25:21]),
@@ -169,19 +181,19 @@ Stage3(
 
 Stage2(
     //WB
-    .RegWrite_i_2(Control.RegWrite_o),
+    .RegWrite_i_2(ControlSignal_o[0]),
     .RegWrite_o_2(Stage3.RegWrite_i_3),
-    .MemtoReg_i_2(Control.MemtoReg_o),
+    .MemtoReg_i_2(ControlSignal_o[1]),
     .MemtoReg_o_2(Stage3.MemtoReg_i_3),
     //M
-    .Memory_write_i_2(Control.Memory_write_o),
+    .Memory_write_i_2(ControlSignal_o[3]),
     .Memory_write_o_2(Stage3.Memory_write_i_3),
-    .Memory_read_i_2(Control.Memory_read_o),
+    .Memory_read_i_2(ControlSignal_o[2]),
     .Memory_read_o_2(Stage3.Memory_read_i_3),
     //EX
-    .ALUSrc_i_2(Control.ALUSrc_o),
-    .ALUOp_i_2(Control.ALUOp_o),
-    .RegDst_i_2(Control.RegDst_o),
+    .ALUSrc_i_2(ControlSignal_o[6]),
+    .ALUOp_i_2(ControlSignal_o[5:4]),
+    .RegDst_i_2(ControlSignal_o[7]),
     .ALUSrc_o_2(mux4.select_i),
     .ALUOp_o_2(ALU_Control.ALUOp_i),
     .RegDst_o_2(mux8.select_i),
@@ -189,4 +201,12 @@ Stage2(
     .clk_i(clk_i)
 );
 
+MUX32 mux3(
+    .data1_i(ControlSignal_i),
+    .data2_i(ZERO),
+    .select_i(),            //注意可能會錯優!!
+    .data_o(ControlSignal_o)//0:RegWrite_o 1:MemtoReg_o 2:Memory_read_o
+                            //3:Memory_write_o [5:4]:ALUOp_o 6:ALUSrc_o
+                            //7:RegDst_i [31:8]:0
+);
 endmodule
