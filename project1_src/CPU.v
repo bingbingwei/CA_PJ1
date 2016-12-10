@@ -16,7 +16,7 @@ wire                [4:0]  mux8_output,Stage2_RTaddr_output;
 wire                Stage3_RegWrite_output,Stage4_RegWrite_output,Stage2_Memory_Read_output;
 wire                [31:0] ControlSignal_i,ZERO,ControlSignal_o,Add_PC_output,Sign_Extend_output;
 wire                [31:0] jump_address;
-reg                 [31:0] jump_address; 
+reg                 [31:0] jump_address_reg; 
 wire                Equal_output,Branch_output,Jump_output,HD_output;
 
 assign              ZERO = 32'b0;
@@ -27,12 +27,14 @@ wire [4:0]  Stage3_RDaddr_output, Stage4_RDaddr_output;
 always @(Control.Jump) begin
     //注意可能會錯
     if(Control.Jump_o == 1)
-      jump_address <= {Add_PC_output[31:28],inst[25:0]<<2,2'b0};
+      jump_address_reg <= {Add_PC_output[31:28],inst[25:0]<<2,2'b0};
 end
+
+assign jump_address = jump_address_reg;
 
 Control Control(
     .Op_i           (inst[31:26]),
-    .Control_o      (ControlSignal_i)
+    .Control_o      (ControlSignal_i),
     .Branch_o       (Branch_output),
     .Jump_o         (Jump_output)
 );
@@ -55,7 +57,7 @@ PC PC(
 
 Instruction_Memory Instruction_Memory(
     .addr_i     (inst_addr), 
-    .instr_o    (Stage1.inst_i),
+    .instr_o    (Stage1.inst_i)
 );
 
 MUX32 mux1(
@@ -63,7 +65,7 @@ MUX32 mux1(
     .data2_i    (Add_PC_output),
     //注意可能會錯
     .select_i   (Branch_output&&Equal_output),
-    .data_o     (mux1_output),
+    .data_o     (mux1_output)
 );
 
 MUX32 mux2(

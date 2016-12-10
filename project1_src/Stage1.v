@@ -1,10 +1,10 @@
-module Stage1{
+module Stage1(
 	inst_i,
 	inst_o,
    HD_i,
    flush_i,
 	clk_i
-};
+);
 
 input         clk_i;
 input  [31:0] inst_i;

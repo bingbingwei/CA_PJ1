@@ -1,4 +1,4 @@
-moudule Stage3(
+module Stage3(
 	RegWrite_i_3,
     RegWrite_o_3,
     MemtoReg_i_3,
