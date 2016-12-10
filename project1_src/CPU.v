@@ -14,9 +14,10 @@ wire                [31:0] inst_addr,inst;
 wire                [31:0] ALU_output,mux5_output,mux7_output,mux1_output;          
 wire                [4:0]  mux8_output,Stage2_RTaddr_output;
 wire                Stage3_RegWrite_output,Stage4_RegWrite_output,Stage2_Memory_Read_output;
-wire                [31:0] ControlSignal_i,ZERO,ControlSignal_o,Add_PC_output,Sign_Extend_ouput;
+wire                [31:0] ControlSignal_i,ZERO,ControlSignal_o,Add_PC_output,Sign_Extend_output;
 wire                [31:0] jump_address;
-wire                Equal_output,Branch_output,Jump_output;
+reg                 [31:0] jump_address; 
+wire                Equal_output,Branch_output,Jump_output,HD_output;
 
 assign              ZERO = 32'b0;
 
@@ -25,14 +26,15 @@ wire [4:0]  Stage3_RDaddr_output, Stage4_RDaddr_output;
 
 always @(Control.Jump) begin
     //注意可能會錯
-    assign jump_address = {Add_PC_output[31:28],inst[25:0]<<2,2'b0};
+    if(Control.Jump_o == 1)
+      jump_address <= {Add_PC_output[31:28],inst[25:0]<<2,2'b0};
 end
 
 Control Control(
     .Op_i           (inst[31:26]),
     .Control_o      (ControlSignal_i)
     .Branch_o       (Branch_output),
-    .Jump           (Jump_output)
+    .Jump_o         (Jump_output)
 );
 
 
@@ -46,6 +48,7 @@ PC PC(
     .clk_i      (clk_i),
     .rst_i      (rst_i),
     .start_i    (start_i),
+    .HD_i       (HD_output),
     .pc_i       (mux2.data_o),
     .pc_o       (inst_addr)
 );
@@ -64,14 +67,14 @@ MUX32 mux1(
 );
 
 MUX32 mux2(
-    .data1_i    (mux1_output),
-    .data2_i    (jump_address),
+    .data1_i    (jump_address),
+    .data2_i    (mux1_output),
     .select_i   (Jump_output),
     .data_o     (PC.pc_i)
 );
 
 Adder Adder(
-    .data1_in   (Sign_Extend_ouput<<2),
+    .data1_in   (Sign_Extend_output<<2),
     .data2_in   (Add_PC_output),
     .data_o     (mux1.data1_i)
 );
@@ -103,7 +106,7 @@ MUX32 mux4(
 
 Sign_Extend Sign_Extend(
     .data_i     (inst[15:0]),
-    .data_o     (Sign_Extend_ouput)
+    .data_o     (Sign_Extend_output)
 );
 
 ALU ALU(
@@ -197,7 +200,7 @@ Stage3 Stage3(
     .Data1_o(Stage3_data1),//four line -> use wire
     .mux7_output_data_i(mux7_output),//three line -> use wire
     .mux7_output_data_o(Data_Memory.write_data_i),
-	.RDaddr_i(mux8_output),
+	 .RDaddr_i(mux8_output),
     .RDaddr_o(Stage3_RDaddr_output)//three line -> use wire
 );
 
@@ -240,30 +243,34 @@ Stage2 Stage2(
 );
 
 MUX32 mux3(
-    .data1_i(ControlSignal_i),
-    .data2_i(ZERO),
-    .select_i(),            //注意可能會錯優!!
+    .data1_i(ZERO),
+    .data2_i(ControlSignal_i),
+    .select_i(HD_output),            //注意可能會錯優!!
     .data_o(ControlSignal_o)//0:RegWrite_o 1:MemtoReg_o 2:Memory_read_o
                             //3:Memory_write_o [5:4]:ALUOp_o 6:ALUSrc_o
                             //7:RegDst_i [31:8]:0
 );
 
 
-Stage1 Stage1{
+Stage1 Stage1(
 	.inst_i(Instruction_Memory.instr_o),
 	.inst_o(inst),
-    .clk
-};
+   .HD_i(HD_output),
+   .flush_i( Jump_Output || (Branch_Output && Equal_Output)),
+   .clk
+);
 
-Hazard_Detection_Unit HD_Unit{
+Hazard_Detection_Unit HD_Unit(
     .RTaddr_i(Stage2_RTaddr_output),//four line -> use wire
-    .Memory_read_i(Stage2_Memory_Read_output)
-};
+    .inst_i(inst),
+    .Memory_read_i(Stage2_Memory_Read_output),
+    .HD_o(HD_output)
+);
 
-Equal Euqal{
+Equal Euqal(
     .data1_i(Reg_RSdata_output),//three line -> use wire
     .data2_i(Reg_RTdata_output),//three line -> use wire
     .data_o(Equal_output)
-};
+);
 
 endmodule

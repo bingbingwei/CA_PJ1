@@ -12,7 +12,6 @@ wire			[1:0] ALUOp;
 
 output			[31:0] Control_o;
 
-<<<<<<< HEAD
 assign			RegDst=(Op_i==6'b000000)?   1'b1:1'b0;     //R-type-->rd : I-type-->rt
 assign			RegWrite=(Op_i==6'b000000                  //R-type
 							|| Op_i==6'b001000                     //addi       
@@ -28,5 +27,7 @@ assign			ALUOp=(Op_i==6'b000000)? 2'b00:            //R-type
 						      2'b00;
 
 assign			Control_o = {24'd0,RegDst,ALUSrc,ALUOp,Memory_write,Memory_read,MemtoReg,RegWrite};	
+
+//assign branch and jump
 
 endmodule
