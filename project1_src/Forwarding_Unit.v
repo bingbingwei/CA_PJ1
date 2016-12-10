@@ -11,7 +11,7 @@ module Forwarding_Unit
 );
 
 input        Stage4_Regwrite_i, Stage3_RegWrite_i;
-input  [4:0] RSaddr_i, RTaddr_i, Regdst_i_WB, Regdst_M;
+input  [4:0] RSaddr_i, RTaddr_i, Regdst_i_WB, Regdst_i_M;
 output [1:0] mux7_o, mux6_o;
 
 //RS

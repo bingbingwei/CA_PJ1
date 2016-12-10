@@ -6,7 +6,7 @@ module Control
 	Jump_o
 );
 
-input			[5:0] Op_i;
+input			[5:0] Op_i, Jump_o, Branch_o;
 wire			ALUSrc,RegWrite,RegDst,MemtoReg,Memory_write, Memory_read;
 wire			[1:0] ALUOp;
 
@@ -29,5 +29,7 @@ assign			ALUOp=(Op_i==6'b000000)? 2'b00:            //R-type
 assign			Control_o = {24'd0,RegDst,ALUSrc,ALUOp,Memory_write,Memory_read,MemtoReg,RegWrite};	
 
 //assign branch and jump
+assign         Branch_o = (Op_i == 6'b000100)? 1 : 0;
+assign         Jump_o = (Op_i == 6'b000010)? 1 : 0;
 
 endmodule

@@ -14,12 +14,20 @@ input	   [31:0]	write_data_i;
 output	[31:0]	read_data_o;
 
 reg		[31:0]	memory	[0:255];
+reg      [31:0]   read_data_o;
 
-assign read_data_o = 32'd0;
 
 //why right shift???
 
-assign memory[address_i>>2] = (Memory_write_i == 1'b1) ? write_data_i : 0;
-assign read_data_o = (Memory_read_i == 1'b1) ? memory[address_i>>2] : 0;
+always@(address_i, Memory_write_i, Memory_read_i, write_data_i) begin
+   if(Memory_write_i == 1'b1) 
+      memory[address_i>>2] = write_data_i;
+   if(Memory_read_i == 1'b1)
+      read_data_o = memory[address_i>>2];
+   else
+      read_data_o = 32'd0;
+
+end   
+
 	
 endmodule
