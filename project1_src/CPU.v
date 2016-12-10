@@ -11,58 +11,69 @@ input               rst_i;
 input               start_i;
 
 wire                [31:0] inst_addr,inst;
-wire                [31:0] ALU_output,mux5_output,mux7_output;          
-wire                [4:0]  mux8_output;
-wire                Stage3_RegWrite_output,Stage4_RegWrite_output;
-wire                [31:0] ControlSignal_i,ZERO,ControlSignal_o;
+wire                [31:0] ALU_output,mux5_output,mux7_output,mux1_output;          
+wire                [4:0]  mux8_output,Stage2_RTaddr_output;
+wire                Stage3_RegWrite_output,Stage4_RegWrite_output,Stage2_Memory_Read_output;
+wire                [31:0] ControlSignal_i,ZERO,ControlSignal_o,Add_PC_output,Sign_Extend_ouput;
+wire                [31:0] jump_address;
+wire                Equal_output,Branch_output,Jump_output;
 
 assign              ZERO = 32'b0;
 
 wire [31:0] Stage3_data1, Reg_RSdata_output, Reg_RTdata_output;
 wire [4:0]  Stage3_RDaddr_output, Stage4_RDaddr_output;
 
+always @(Control.Jump) begin
+    //注意可能會錯
+    assign jump_address = {Add_PC_output[31:28],inst[25:0]<<2,2'b0};
+end
+
 Control Control(
     .Op_i           (inst[31:26]),
-    .RegDst_o       (Stage2.RegDst_i_2),
-    .ALUOp_o        (Stage2.ALUOp_i_2), //0: R-type,1: ADD;2: or,3: sub
-    .ALUSrc_o       (Stage2.ALUSrc_i_2),
-    .Memory_write_o (Data_Memory.Memory_write_i),
-    .Memory_read_o  (Data_Memory.Memory_read_i),
-    .MemtoReg_o     (mux5.select_i),
-    .RegWrite_o     (Registers.RegWrite_i)
+    .Control_o      (ControlSignal_i)
+    .Branch_o       (Branch_output),
+    .Jump           (Jump_output)
 );
 
-<<<<<<< HEAD
-Control_Sign_Extend Control_Sign_Extend(
-    .RegDst_i           (Control.RegDst_o),
-    .ALUOp_i            (Control.ALUOp_o),
-    .ALUSrc_i           (Control.ALUSrc_o),
-    .Memory_read_i      (Control.Memory_read_o),
-    .Memory_write_i     (Control.Memory_write_o),
-    .MemtoReg_i         (Control.MemtoReg_o),
-    .RegWrite_i         (Control.RegWrite_o),
-    .Control_Signal_o   (ControlSignal_i)
-);
 
-=======
->>>>>>> b2c212db02d4ab0aa4ff5b16a09377297a4688a2
 Adder Add_PC(
     .data1_in   (inst_addr),
     .data2_in   (32'd4),
-    .data_o     (PC.pc_i)
+    .data_o     (Add_PC_output)
 );
 
 PC PC(
     .clk_i      (clk_i),
     .rst_i      (rst_i),
     .start_i    (start_i),
-    .pc_i       (Add_PC.data_o),
+    .pc_i       (mux2.data_o),
     .pc_o       (inst_addr)
 );
 
 Instruction_Memory Instruction_Memory(
     .addr_i     (inst_addr), 
-    .instr_o    (Stage1.inst_i)
+    .instr_o    (Stage1.inst_i),
+);
+
+MUX32 mux1(
+    .data1_i    (Adder.data_o),
+    .data2_i    (Add_PC_output),
+    //注意可能會錯
+    .select_i   (Branch_output&&Equal_output),
+    .data_o     (mux1_output),
+);
+
+MUX32 mux2(
+    .data1_i    (mux1_output),
+    .data2_i    (jump_address),
+    .select_i   (Jump_output),
+    .data_o     (PC.pc_i)
+);
+
+Adder Adder(
+    .data1_in   (Sign_Extend_ouput<<2),
+    .data2_in   (Add_PC_output),
+    .data_o     (mux1.data1_i)
 );
 
 Registers Registers(
@@ -92,7 +103,7 @@ MUX32 mux4(
 
 Sign_Extend Sign_Extend(
     .data_i     (inst[15:0]),
-    .data_o     (Stage2.Sign_extend_i)
+    .data_o     (Sign_Extend_ouput)
 );
 
 ALU ALU(
@@ -140,34 +151,16 @@ MUX32v3 mux7(
 );
 
 Forwarding_Unit Forwarding_Unit(
-<<<<<<< HEAD
-    .regdst_i_WB(mux8_output),
-    .regdst_i_M(mux8_output),
-    .RSaddr_i(inst[25:21]),
-    .RTaddr_i(inst[20:16]),
-=======
+
     .Regdst_i_WB(Stage4_RDaddr_output),//three line -> use wire
     .Regdst_i_M(Stage3_RDaddr_output),//three line -> use wire
     .RSaddr_i(Stage2.RSaddr_o),
     .RTaddr_i(Stage2_RTaddr_output),//four line -> use wire
->>>>>>> b2c212db02d4ab0aa4ff5b16a09377297a4688a2
     .Stage4_Regwrite_i(Stage4_RegWrite_output),
     .Stage3_RegWrite_i(Stage3_RegWrite_output),
     .mux7_o(mux7.select_i),
     .mux6_o(mux6.select_i)
 );
-
-Hazard_Detection_Unit HD_Unit{
-	.RTaddr_i(Stage2_RTaddr_output),//four line -> use wire
-
-};
-
-Equal Euqal{
-	.data1_i(Reg_RSdata_output),//three line -> use wire
-	.data2_i(Reg_RTdata_output),//three line -> use wire
-	.data_o()
-
-};
 
 Stage4 Stage4(
     //WB
@@ -193,10 +186,10 @@ Stage3 Stage3(
     .MemtoReg_i_3(Stage2.MemtoReg_o_2),
     .MemtoReg_o_3(Stage4.MemtoReg_i_4),
     //M
-    .Memory_write_i_3(Stage3.Memory_write_o_2),
+    .Memory_write_i_3(Stage2.Memory_write_o_2),
     .Memory_write_o_3(Data_Memory.Memory_write_i),
-    .Memory_read_i_3(Stage3.Memory_read_o_2),
-    .Memory_read_o_3(Data_Memory.Memory_read_i).
+    .Memory_read_i_3(Stage2_Memory_Read_output),
+    .Memory_read_o_3(Data_Memory.Memory_read_i),
     //clk
     .clk_i(clk_i),
     //other 3*2
@@ -218,7 +211,7 @@ Stage2 Stage2(
     .Memory_write_i_2(ControlSignal_o[3]),
     .Memory_write_o_2(Stage3.Memory_write_i_3),
     .Memory_read_i_2(ControlSignal_o[2]),
-    .Memory_read_o_2(Stage3.Memory_read_i_3),
+    .Memory_read_o_2(Stage2_Memory_Read_output),
     //EX
     .ALUSrc_i_2(ControlSignal_o[6]),
     .ALUOp_i_2(ControlSignal_o[5:4]),
@@ -227,8 +220,23 @@ Stage2 Stage2(
     .ALUOp_o_2(ALU_Control.ALUOp_i),
     .RegDst_o_2(mux8.select_i),
     //clk
-<<<<<<< HEAD
-    .clk_i(clk_i)
+    .clk_i(clk_i),
+    
+    //other 7*2 -> 6*2 (有一條可以不用理他)
+    .RSdata_i(Reg_RSdata_output),//three line -> use wire
+    .RSdata_o(mux6.data1_i),
+    .RTdata_i(Reg_RTdata_output),//three line -> use wire
+    .RTdata_o(mux7.data1_i),
+    
+    .Sign_extend_i(Sign_Extend_ouput),
+    .Sign_extend_o(mux4.data2_i),
+    
+    .RSaddr_i(inst[25:21]),
+    .RSaddr_o(Forwarding_Unit.RSaddr_i),
+    .RTaddr_i(inst[20:16]),
+    .RTaddr_o(Stage2_RTaddr_output),//four line -> use wire
+    .RDaddr_i(inst[15:11]),
+    .RDaddr_o(mux8.data2_i)
 );
 
 MUX32 mux3(
@@ -239,31 +247,23 @@ MUX32 mux3(
                             //3:Memory_write_o [5:4]:ALUOp_o 6:ALUSrc_o
                             //7:RegDst_i [31:8]:0
 );
-endmodule
-=======
-    .clk_i(clk_i),
-	
-    //other 7*2 -> 6*2 (有一條可以不用理他)
-    .RSdata_i(Reg_RSdata_output),//three line -> use wire
-    .RSdata_o(mux6.data1_i),
-    .RTdata_i(Reg_RTdata_output),//three line -> use wire
-    .RTdata_o(mux7.data1_i),
-    
-	.Sign_extend_i(Sign_Extend.data_o),
-    .Sign_extend_o(mux4.data2_i),
-    
-	.RSaddr_i(inst[25:21]),
-	.RSaddr_o(Forwarding_Unit.RSaddr_i),
-	.RTaddr_i(inst[20:16]),
-	.RTaddr_o(Stage2_RTaddr_output),//four line -> use wire
-	.RDaddr_i(inst[15:11]),
-	.RDaddr_o(mux8.data2_i)
-);
+
 
 Stage1 Stage1{
 	.inst_i(Instruction_Memory.instr_o),
-	.inst_o(inst)
+	.inst_o(inst),
+    .clk
+};
+
+Hazard_Detection_Unit HD_Unit{
+    .RTaddr_i(Stage2_RTaddr_output),//four line -> use wire
+    .Memory_read_i(Stage2_Memory_Read_output)
+};
+
+Equal Euqal{
+    .data1_i(Reg_RSdata_output),//three line -> use wire
+    .data2_i(Reg_RTdata_output),//three line -> use wire
+    .data_o(Equal_output)
 };
 
 endmodule
->>>>>>> b2c212db02d4ab0aa4ff5b16a09377297a4688a2
