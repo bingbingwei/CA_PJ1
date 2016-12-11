@@ -47,7 +47,7 @@ Adder Add_PC(
 PC PC(
     .clk_i      (clk_i),
     .start_i    (start_i),
-    .HD_i       (HD_output),
+    .HD_i       (HD_Unit.HD_o_PC),
     .pc_i       (mux2.data_o),
     .pc_o       (inst_addr)
 );
@@ -58,23 +58,23 @@ Instruction_Memory Instruction_Memory(
 );
 
 MUX32 mux1(
-    .data1_i    (Add_PC_output),
-    .data2_i    (Adder.data_o),
+    .data1_i    (Add_PC_output), //0
+    .data2_i    (Adder.data_o), //1
     //注意可能會錯
     .select_i   (Branch_output&&Equal_output),
     .data_o     (mux1_output)
 );
 
 MUX32 mux2(
-    .data1_i    (mux1_output),
-    .data2_i    (jump_address),
+    .data1_i    (mux1_output),//jump_address, 0
+    .data2_i    (jump_address),//mux1_output, 1
     .select_i   (Jump_output),
     .data_o     (PC.pc_i)
 );
 
 Adder Adder(
     .data1_in   (Sign_Extend_output<<2),
-    .data2_in   (Add_PC_output),
+    .data2_in   (Stage1.data1_o_1),
     .data_o     (mux1.data2_i)
 );
 
@@ -122,6 +122,7 @@ ALU_Control ALU_Control(
 );
 
 Data_Memory Data_Memory(
+    .clk_i          (clk_i),
     .address_i      (Stage3_data1),
     .Memory_write_i (Stage3.Memory_write_o_3),
     .Memory_read_i  (Stage3.Memory_read_o_3),
@@ -130,8 +131,8 @@ Data_Memory Data_Memory(
 );
 
 MUX32 mux5(
-    .data1_i(Stage4.Data1_o),//0
-    .data2_i(Stage4.Data2_o),//1
+    .data1_i(Stage4.Data2_o),//0, Stage4.Data2_o
+    .data2_i(Stage4.Data1_o),//1, Stage4.Data1_o
     .select_i(Stage4.MemtoReg_o_4),
     .data_o(mux5_output)
 );
@@ -174,9 +175,9 @@ Stage4 Stage4(
     .clk_i(clk_i),
     //other 3*2
     .Data1_i(Data_Memory.read_data_o),
-	.Data1_o(mux5.data1_i),
+	.Data1_o(mux5.data2_i),
     .Data2_i(Stage3_data1),//four line -> use wire
-	.Data2_o(mux5.data2_i),
+	.Data2_o(mux5.data1_i),
     .RDaddr_i(Stage3_RDaddr_output),//three line -> use wire
     .RDaddr_o(Stage4_RDaddr_output)//three line -> use wire***
 );
@@ -242,9 +243,9 @@ Stage2 Stage2(
 );
 
 MUX32 mux3(
-    .data1_i(ZERO),
-    .data2_i(ControlSignal_i),
-    .select_i(HD_output),            //注意可能會錯優!!
+    .data1_i(ControlSignal_i),//0, ControlSignal_i
+    .data2_i(ZERO),//1, ZERO
+    .select_i(HD_Unit.HD_o_mux3),            //注意可能會錯優!!
     .data_o(ControlSignal_o)//0:RegWrite_o 1:MemtoReg_o 2:Memory_read_o
                             //3:Memory_write_o [5:4]:ALUOp_o 6:ALUSrc_o
                             //7:RegDst_i [31:8]:0
@@ -254,8 +255,10 @@ MUX32 mux3(
 Stage1 Stage1(
 	.inst_i(Instruction_Memory.instr_o),
 	.inst_o(inst),
-    .HD_i(HD_output),
+    .HD_i(HD_Unit.HD_o_Stage1),
     .flush_i( Jump_Output || (Branch_Output && Equal_Output)),
+    .data1_i(Add_PC_output),
+    .data1_o_1(Adder.data2_in),
     .clk_i
 );
 
@@ -263,10 +266,12 @@ Hazard_Detection_Unit HD_Unit(
     .RTaddr_i(Stage2_RTaddr_output),//four line -> use wire
     .inst_i(inst),
     .Memory_read_i(Stage2_Memory_Read_output),
-    .HD_o(HD_output)
+    .HD_o_PC(PC.HD_i),
+    .HD_o_Stage1(Stage1.HD_i),
+    .HD_o_mux3(mux3.select_i)
 );
 
-Equal Euqal(
+Equal Equal(
     .data1_i(Reg_RSdata_output),//three line -> use wire
     .data2_i(Reg_RTdata_output),//three line -> use wire
     .data_o(Equal_output)

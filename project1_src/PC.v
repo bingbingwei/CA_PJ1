@@ -21,6 +21,8 @@ reg     [31:0]      pc_o;
 always@(posedge clk_i) begin
     if(start_i)
         pc_o <= pc_i;
+    else if(HD_i)
+        pc_o <= pc_o; 
     else
         pc_o <= pc_o;
 end

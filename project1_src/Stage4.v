@@ -24,11 +24,11 @@ reg    [31:0] Data1_o, Data2_o;
 reg	   [4:0]  RDaddr_o;
 
 always @(posedge clk_i) begin
-	RegWrite_o_4 = RegWrite_i_4;
-	MemtoReg_o_4 = MemtoReg_i_4;
-	Data1_o = Data1_i;
-	Data2_o = Data2_i;
-	RDaddr_o = RDaddr_o;
+	RegWrite_o_4 <= RegWrite_i_4;
+	MemtoReg_o_4 <= MemtoReg_i_4;
+	Data1_o <= Data1_i;
+	Data2_o <= Data2_i;
+	RDaddr_o <= RDaddr_i;
 end
 
 endmodule

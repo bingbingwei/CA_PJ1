@@ -35,7 +35,7 @@ initial begin
     end
 
     CPU.PC.pc_o = 32'b0;
-    CPU.Stage1.tmp = 32'b0;
+    //CPU.Stage1.tmp = 32'b0;
     
     // Load instructions into instruction memory
     $readmemb("instruction.txt", CPU.Instruction_Memory.memory);
@@ -67,6 +67,15 @@ always@(posedge Clk) begin
     // if(CPU.HazzardDetection.mux8_o == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Branch_o == 0)stall = stall + 1;
     // if(CPU.HazzardDetection.Flush_o == 1)flush = flush + 1;  
 
+    $fdisplay(outfile, "stage3 data1_i: %b", CPU.Stage3.Data1_i);
+    $fdisplay(outfile, "stage4 data2_i: %b", CPU.Stage4.Data2_i);
+    $fdisplay(outfile, "mux5 data1_i: %b", CPU.mux5.data1_i);
+    $fdisplay(outfile, "mux6 data2_i: %b", CPU.mux6.data2_i);
+    $fdisplay(outfile, "ALU data1, data2, output:%b,%b,%b", CPU.ALU.data1_i, CPU.ALU.data2_i,CPU.ALU_output);
+    $fdisplay(outfile, "Stage3_data1:%b", CPU.Stage3_data1);
+    $fdisplay(outfile, "Data_Memory address_i:%b", CPU.Data_Memory.address_i);
+    $fdisplay(outfile, "Data_Memory write_data_i:%b", CPU.Data_Memory.write_data_i);
+    
     // print PC
     $fdisplay(outfile, "cycle = %d, Start = %d, Stall = %d, Flush = %d\nPC = %d", counter, Start, stall, flush, CPU.PC.pc_o);
     $fdisplay(outfile, "mux1 select = %d: %d, mux2 select = %d: %d",CPU.mux1.select_i,CPU.mux1.data_o,CPU.mux2.select_i,CPU.mux2.data_o);
@@ -96,7 +105,7 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\n");
     
     counter = counter + 1;
-    if(CPU.HD_Unit.HD_o == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Control_o == 0) 
+    if(CPU.HD_Unit.HD_o_Stage1 == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Control_o == 0) 
        stall = stall + 1;
     if(CPU.Stage1.flush_i == 1)
        flush = flush + 1;
