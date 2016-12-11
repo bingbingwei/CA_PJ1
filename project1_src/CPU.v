@@ -97,7 +97,7 @@ Registers Registers(
     .clk_i      (clk_i),
     .RSaddr_i   (inst[25:21]),
     .RTaddr_i   (inst[20:16]),
-    .RDaddr_i   (Stage4_RDaddr_o),//three line -> use wire
+    .RDaddr_i   (Stage4_RDaddr_o),
     .RDdata_i   (mux5_o),
     .RegWrite_i (Stage4_RegWrite_o), 
     .RSdata_o   (RSdata),//three line -> use wire

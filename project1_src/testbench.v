@@ -35,7 +35,42 @@ initial begin
     end
 
     CPU.PC.pc_o = 32'b0;
-    //CPU.Stage1.tmp = 32'b0;
+    
+    CPU.HD_Unit.HD_o_PC = 0;
+    CPU.HD_Unit.HD_o_Stage1 = 0;
+    CPU.HD_Unit.HD_o_mux3 = 0;
+    
+    CPU.Stage1.inst_o = 32'b0;
+    
+    CPU.Stage2.RegWrite_o_2 = 0;
+    CPU.Stage2.MemtoReg_o_2 = 0;
+    CPU.Stage2.Memory_write_o_2 = 0;
+    CPU.Stage2.Memory_read_o_2 = 0;
+    CPU.Stage2.ALUSrc_o_2 = 0;
+    CPU.Stage2.RegDst_o_2 = 0;
+    CPU.Stage2.ALUOp_o_2 = 2'b0;
+    CPU.Stage2.RSaddr_o = 5'b0;
+    CPU.Stage2.RTaddr_o = 5'b0;
+    CPU.Stage2.RDaddr_o = 5'b0;
+    CPU.Stage2.RSdata_o = 32'b0;
+    CPU.Stage2.RTdata_o = 32'b0;
+    CPU.Stage2.Sign_extend_o = 32'b0;
+    CPU.Stage2.funct_o = 6'b0;
+
+    CPU.Stage3.RegWrite_o_3 = 0;
+    CPU.Stage3.Memory_write_o_3 = 0;
+    CPU.Stage3.MemtoReg_o_3 = 0;
+    CPU.Stage3.Memory_read_o_3 = 0;
+    CPU.Stage3.Data1_o = 32'b0;
+    CPU.Stage3.mux7_output_data_o = 32'b0;
+    CPU.Stage3.RDaddr_o = 5'b0; 
+     
+    CPU.Stage4.RegWrite_o_4 = 0;
+    CPU.Stage4.MemtoReg_o_4 = 0;
+    CPU.Stage4.Data1_o = 32'b0;
+    CPU.Stage4.Data2_o = 32'b0;
+    CPU.Stage4.RDaddr_o = 5'b0;
+
     
     // Load instructions into instruction memory
     $readmemb("instruction.txt", CPU.Instruction_Memory.memory);
@@ -68,11 +103,13 @@ always@(posedge Clk) begin
     // if(CPU.HazzardDetection.Flush_o == 1)flush = flush + 1;  
 
     //debug messages
-    $fdisplay(outfile, "control: %b", CPU.Control.Control_o);
     $fdisplay(outfile, "stage2 alu op:%b", CPU.Stage2.ALUOp_i_2); 
-    $fdisplay(outfile, "stage2_rsdata:%d, stage2_rtdata:%d", CPU.Stage2.RSdata_o, CPU.Stage2.RTdata_o);
+    $fdisplay(outfile, "stage2_rsdata_i:%d, stage2_rsdata_o:%d", CPU.Stage2.RSdata_i, CPU.Stage2.RSdata_o);
     $fdisplay(outfile, "alu ctrl funct:%b, alu op:%b, alu ctrl:%b", CPU.ALU_Control.funct_i, CPU.ALU_Control.ALUOp_i, CPU.ALU_Control.ALUCtrl_o); 
+    $fdisplay(outfile, "alu data1:%b, alu data2:%b", CPU.ALU.data1_i, CPU.ALU.data2_i);
     $fdisplay(outfile, "alu: %d", CPU.ALU_o);   
+    $fdisplay(outfile, "sign extended:%b", CPU.Stage2.Sign_extend_o);
+    $fdisplay(outfile, "mux4 data1:%b, data2:%b", CPU.mux4.data1_i, CPU.mux4.data2_i);
     $fdisplay(outfile, "data memory addr: %b", CPU.Data_Memory.address_i);   
 
 
