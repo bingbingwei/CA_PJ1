@@ -25,8 +25,8 @@ initial begin
     end
     
     // initialize data memory
-    for(i=0; i<8; i=i+1) begin
-        CPU.Data_Memory.memory[i] = 32'b0;
+    for(i=0; i<32; i=i+1) begin
+        CPU.Data_Memory.memory[i] = 8'b0;
     end    
         
     // initialize Register File
@@ -68,7 +68,11 @@ always@(posedge Clk) begin
     // if(CPU.HazzardDetection.Flush_o == 1)flush = flush + 1;  
 
     //debug messages
-    $fdisplay(outfile, "mux6_o: %b, mux4_o: %b", CPU.mux6_o, CPU.mux4_o);   
+    $fdisplay(outfile, "control: %b", CPU.Control.Control_o);
+    $fdisplay(outfile, "stage2 alu op:%b", CPU.Stage2.ALUOp_i_2); 
+    $fdisplay(outfile, "stage2_rsdata:%d, stage2_rtdata:%d", CPU.Stage2.RSdata_o, CPU.Stage2.RTdata_o);
+    $fdisplay(outfile, "alu ctrl funct:%b, alu op:%b, alu ctrl:%b", CPU.ALU_Control.funct_i, CPU.ALU_Control.ALUOp_i, CPU.ALU_Control.ALUCtrl_o); 
+    $fdisplay(outfile, "alu: %d", CPU.ALU_o);   
     $fdisplay(outfile, "data memory addr: %b", CPU.Data_Memory.address_i);   
 
 

@@ -21,12 +21,12 @@ assign			MemtoReg=(Op_i==6'b100011)? 1'b1:1'b0;     //lw
 assign			Memory_write=(Op_i==6'b101011)? 1'b1:1'b0; //sw
 assign			Memory_read=(Op_i==6'b100011)? 1'b1:1'b0;  //lw
 assign			ALUOp=(Op_i==6'b000000)? 2'b00:            //R-type
-						     (Op_i==6'b100011 || Op_i==6'b101011)? 2'b01://lw sw :ADD
+						     (Op_i==6'b100011 || Op_i==6'b101011 || Op_i==6'b001000)? 2'b01://lw sw addi :ADD
 						     (Op_i==6'b001101)? 2'b10://ori :OR
 						     (Op_i==6'b000100)? 2'b11://beq :SUB
 						      2'b00;
 
-assign			Control_o = {24'd0,RegDst,ALUSrc,ALUOp,Memory_write,Memory_read,MemtoReg,RegWrite};	
+assign			Control_o = {24'b0,RegDst,ALUSrc,ALUOp,Memory_write,Memory_read,MemtoReg,RegWrite};	
 
 //assign branch and jump
 assign         Branch_o = (Op_i == 6'b000100)? 1'b1 : 1'b0;

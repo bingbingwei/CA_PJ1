@@ -6,8 +6,8 @@ module ALU_Control
 );
 
 input			[5:0] funct_i;
-input			[1:0]ALUOp_i;
-output			[2:0]ALUCtrl_o;
+input			[1:0] ALUOp_i;
+output		[2:0] ALUCtrl_o;
 
 assign ALUCtrl_o=(ALUOp_i==2'b01)? 3'b000: //add //I-type, addi, lw, sw
 				 (ALUOp_i==2'b10)? 3'b011:     //or  //I-type, ori
