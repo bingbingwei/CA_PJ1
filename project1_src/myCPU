@@ -296,4 +296,10 @@ Equal Equal(
     .data_o(equal_o)
 );
 
+JumpAddr JumpAddr(
+    .inst_26(inst[25:0]),
+    .mux1_o_3(mux1[31:28]),
+    .jump_addr(jump_addr)    
+);
+
 endmodule
