@@ -259,7 +259,7 @@ Stage1 Stage1(
     .flush_i( Jump_Output || (Branch_Output && Equal_Output)),
     .data1_i(Add_PC_output),
     .data1_o_1(Adder.data2_in),
-    .clk_i
+    .clk_i(clk_i)
 );
 
 Hazard_Detection_Unit HD_Unit(
