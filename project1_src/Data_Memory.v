@@ -13,7 +13,7 @@ input	            Memory_read_i;
 input	   [31:0]	write_data_i;
 output	[31:0]	read_data_o;
 
-reg		[31:0]	memory	[0:255];
+reg		[31:0]	memory	[0:31];
 reg      [31:0]   read_data_o;
 
 

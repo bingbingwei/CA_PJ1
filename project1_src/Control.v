@@ -9,7 +9,7 @@ module Control
 input			[5:0] Op_i;
 wire			ALUSrc,RegWrite,RegDst,MemtoReg,Memory_write, Memory_read;
 wire			[1:0] ALUOp;
-input			Jump_o,Branch_o;
+output			Jump_o,Branch_o;
 output			[31:0] Control_o;
 
 assign			RegDst=(Op_i==6'b000000)?   1'b1:1'b0;     //R-type-->rd : I-type-->rt

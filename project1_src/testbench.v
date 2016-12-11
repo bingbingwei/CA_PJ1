@@ -89,7 +89,10 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\n");
     
     counter = counter + 1;
-    
+    if(CPU.HD_Unit.HD_o == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Control_o == 0) 
+       stall = stall + 1;
+    if(CPU.Stage1.flush_i == 1)
+       flush = flush + 1;
       
 end
 
