@@ -1,13 +1,11 @@
 module CPU
 (
     clk_i, 
-    rst_i,
     start_i
 );
 
 // Ports
 input               clk_i;
-input               rst_i;
 input               start_i;
 
 wire                [31:0] inst_addr,inst;
@@ -48,7 +46,6 @@ Adder Add_PC(
 
 PC PC(
     .clk_i      (clk_i),
-    .rst_i      (rst_i),
     .start_i    (start_i),
     .HD_i       (HD_output),
     .pc_i       (mux2.data_o),
@@ -61,16 +58,16 @@ Instruction_Memory Instruction_Memory(
 );
 
 MUX32 mux1(
-    .data1_i    (Adder.data_o),
-    .data2_i    (Add_PC_output),
+    .data1_i    (Add_PC_output),
+    .data2_i    (Adder.data_o),
     //注意可能會錯
     .select_i   (Branch_output&&Equal_output),
     .data_o     (mux1_output)
 );
 
 MUX32 mux2(
-    .data1_i    (jump_address),
-    .data2_i    (mux1_output),
+    .data1_i    (mux1_output),
+    .data2_i    (jump_address),
     .select_i   (Jump_output),
     .data_o     (PC.pc_i)
 );
@@ -78,7 +75,7 @@ MUX32 mux2(
 Adder Adder(
     .data1_in   (Sign_Extend_output<<2),
     .data2_in   (Add_PC_output),
-    .data_o     (mux1.data1_i)
+    .data_o     (mux1.data2_i)
 );
 
 Registers Registers(
@@ -257,9 +254,9 @@ MUX32 mux3(
 Stage1 Stage1(
 	.inst_i(Instruction_Memory.instr_o),
 	.inst_o(inst),
-   .HD_i(HD_output),
-   .flush_i( Jump_Output || (Branch_Output && Equal_Output)),
-   .clk_i
+    .HD_i(HD_output),
+    .flush_i( Jump_Output || (Branch_Output && Equal_Output)),
+    .clk_i
 );
 
 Hazard_Detection_Unit HD_Unit(

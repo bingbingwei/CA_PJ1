@@ -25,18 +25,23 @@ initial begin
     end
     
     // initialize data memory
-    for(i=0; i<32; i=i+1) begin
-        CPU.Data_Memory.memory[i] = 8'b0;
+    for(i=0; i<8; i=i+1) begin
+        CPU.Data_Memory.memory[i] = 32'b0;
     end    
         
     // initialize Register File
     for(i=0; i<32; i=i+1) begin
         CPU.Registers.register[i] = 32'b0;
     end
+
+    CPU.PC.pc_o = 32'b0;
+    CPU.Stage1.tmp = 32'b0;
     
     // Load instructions into instruction memory
     $readmemb("instruction.txt", CPU.Instruction_Memory.memory);
     
+    $fdisplay(outfile, "%d%d%d%d%d", counter, Start, stall, flush, CPU.PC.pc_o);
+
     // Open output file
     outfile = $fopen("output.txt") | 1;
     
@@ -64,7 +69,9 @@ always@(posedge Clk) begin
 
     // print PC
     $fdisplay(outfile, "cycle = %d, Start = %d, Stall = %d, Flush = %d\nPC = %d", counter, Start, stall, flush, CPU.PC.pc_o);
-    
+    $fdisplay(outfile, "mux1 select = %d: %d, mux2 select = %d: %d",CPU.mux1.select_i,CPU.mux1.data_o,CPU.mux2.select_i,CPU.mux2.data_o);
+    $fdisplay(outfile, "Instruction = | OP || RS|| RT|| RD||   imme  |\nInstruction = %b",CPU.Instruction_Memory.instr_o);
+    $fdisplay(outfile, "Add_PC = %d, Adder = %d",CPU.inst_addr,CPU.Add_PC_output);
     // print Registers
     $fdisplay(outfile, "Registers");
     $fdisplay(outfile, "R0(r0) = %d, R8 (t0) = %d, R16(s0) = %d, R24(t8) = %d", CPU.Registers.register[0], CPU.Registers.register[8] , CPU.Registers.register[16], CPU.Registers.register[24]);
