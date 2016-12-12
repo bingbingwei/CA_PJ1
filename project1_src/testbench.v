@@ -102,22 +102,51 @@ always@(posedge Clk) begin
     // if(CPU.HazzardDetection.mux8_o == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Branch_o == 0)stall = stall + 1;
     // if(CPU.HazzardDetection.Flush_o == 1)flush = flush + 1;  
 
+    $fdisplay(outfile, "=============================================================================================");
+    $fdisplay(outfile, "cycle = %d\n", counter);
+	$fdisplay(outfile, "Stage0:\n");
+    $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o);
+    $fdisplay(outfile, "\tinstrcuct :%b",CPU.Instruction_Memory.instr_o);
+
     //debug messages
-    $fdisplay(outfile, "stage2 alu op:%b", CPU.Stage2.ALUOp_i_2); 
-    $fdisplay(outfile, "stage2_rsdata_i:%d, stage2_rsdata_o:%d", CPU.Stage2.RSdata_i, CPU.Stage2.RSdata_o);
-    $fdisplay(outfile, "alu ctrl funct:%b, alu op:%b, alu ctrl:%b", CPU.ALU_Control.funct_i, CPU.ALU_Control.ALUOp_i, CPU.ALU_Control.ALUCtrl_o); 
-    $fdisplay(outfile, "alu data1:%b, alu data2:%b", CPU.ALU.data1_i, CPU.ALU.data2_i);
-    $fdisplay(outfile, "alu: %d", CPU.ALU_o);   
-    $fdisplay(outfile, "sign extended:%b", CPU.Stage2.Sign_extend_o);
-    $fdisplay(outfile, "mux4 data1:%b, data2:%b", CPU.mux4.data1_i, CPU.mux4.data2_i);
-    $fdisplay(outfile, "data memory addr: %b", CPU.Data_Memory.address_i);   
+    $fdisplay(outfile, "Stage1:\n");
+    $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o-4);
+    $fdisplay(outfile, "\tinstrcuct :%b",CPU.Stage1.inst_o);
+    $fdisplay(outfile, "\tdata1_o_1 :%b",CPU.Stage1.data1_o_1);
+    $fdisplay(outfile, "\tControl_in:%b",CPU.Control.Op_i);
+    $fdisplay(outfile, "\tControl_o :%b",CPU.Control.Control_o);
 
+    $fdisplay(outfile, "Stage2:\n");
+    $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o-8);
+    $fdisplay(outfile, "\tRegDst_o_2:%b",CPU.Stage2.RegDst_o_2);
+    $fdisplay(outfile, "\tRS Data   :%b",CPU.Stage2.RSdata_o);
+    $fdisplay(outfile, "\tRT Data   :%b",CPU.Stage2.RTdata_o);
+    $fdisplay(outfile, "\timmediate :%b",CPU.Stage2.Sign_extend_o);
+    $fdisplay(outfile, "\tRS Addr   :%b",CPU.Stage2.RSaddr_o);
+    $fdisplay(outfile, "\tRT Addr   :%b",CPU.Stage2.RTaddr_o);
+    $fdisplay(outfile, "\tRD Addr   :%b",CPU.Stage2.RDaddr_o);
+    $fdisplay(outfile, "\tfunction  :%b",CPU.Stage2.funct_o);
 
-    // print PC
-    $fdisplay(outfile, "cycle = %d, Start = %d, Stall = %d, Flush = %d\nPC = %d", counter, Start, stall, flush, CPU.PC.pc_o);
-    $fdisplay(outfile, "mux1 select = %d: %d, mux2 select = %d: %d",CPU.mux1.select_i,CPU.mux1.data_o,CPU.mux2.select_i,CPU.mux2.data_o);
-    $fdisplay(outfile, "Instruction = | OP || RS|| RT|| RD||   imme  |\nInstruction = %b",CPU.Instruction_Memory.instr_o);
-    $fdisplay(outfile, "Add_PC = %d, Adder = %d",CPU.inst_addr,CPU.Add_PC_o);
+    $fdisplay(outfile, "Stage3:\n");
+    $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o-12);
+    $fdisplay(outfile, "\tMemWrite  :%b",CPU.Stage3.Memory_write_o_3);
+    $fdisplay(outfile, "\tMem Read  :%b",CPU.Stage3.Memory_read_o_3);
+    $fdisplay(outfile, "\tMemtoReg  :%b",CPU.Stage3.MemtoReg_o_3);
+    $fdisplay(outfile, "\tRegWrite  :%b",CPU.Stage3.RegWrite_o_3);
+    $fdisplay(outfile, "\tALUOutput :%b",CPU.Stage3.Data1_o);
+    $fdisplay(outfile, "\tMux7Output:%b",CPU.Stage3.mux7_output_data_o);
+    $fdisplay(outfile, "\tRD Addr   :%b",CPU.Stage3.RDaddr_o);
+
+    $fdisplay(outfile, "Stage4:\n");
+    $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o-16);
+    $fdisplay(outfile, "\tMemtoReg  :%b",CPU.Stage4.MemtoReg_o_4);
+    $fdisplay(outfile, "\tRegWrite  :%b",CPU.Stage4.RegWrite_o_4);
+    $fdisplay(outfile, "\tRD Addr   :%b",CPU.Stage4.RDaddr_o);
+    $fdisplay(outfile, "\tLw Data   :%b",CPU.Stage4.Data1_o);
+    $fdisplay(outfile, "\tALUOutput :%b",CPU.Stage4.Data2_o);
+
+	$fdisplay(outfile, "------");
+	
     // print Registers
     $fdisplay(outfile, "Registers");
     $fdisplay(outfile, "R0(r0) = %d, R8 (t0) = %d, R16(s0) = %d, R24(t8) = %d", CPU.Registers.register[0], CPU.Registers.register[8] , CPU.Registers.register[16], CPU.Registers.register[24]);
