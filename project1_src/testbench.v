@@ -73,7 +73,8 @@ initial begin
 
     
     // Load instructions into instruction memory
-    $readmemb("Fibonacci_instruction.txt", CPU.Instruction_Memory.memory);
+    $readmemb("instruction.txt", CPU.Instruction_Memory.memory);
+    //$readmemb("Fibonacci_instruction.txt", CPU.Instruction_Memory.memory);
     
     $fdisplay(outfile, "%d%d%d%d%d", counter, Start, stall, flush, CPU.PC.pc_o);
 
@@ -95,28 +96,28 @@ initial begin
 end
   
 always@(posedge Clk) begin
-    if(counter == 33)    // stop after 30 cycles
+    if(counter == 30)    // stop after 30 cycles
         $stop;
 
     // put in your own signal to count stall and flush
     // if(CPU.HazzardDetection.mux8_o == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Branch_o == 0)stall = stall + 1;
     // if(CPU.HazzardDetection.Flush_o == 1)flush = flush + 1;  
-    if(CPU.HD_Unit.HD_o_Stage1 == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Control_o == 0) 
+    if(CPU.HD_Unit.HD_o_Stage1 == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Branch_o == 0) 
        stall = stall + 1;
     if(CPU.Stage1.flush_i == 1)
        flush = flush + 1;
 
-    $fdisplay(outfile, "=============================================================================================");
+    /*$fdisplay(outfile, "=============================================================================================");
     $fdisplay(outfile, "cycle = %d\n", counter);
 	$fdisplay(outfile, "Stage0:\n");
     $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o);
-    $fdisplay(outfile, "\tinstrcuct :%b",CPU.Instruction_Memory.instr_o);
+    $fdisplay(outfile, "\tinstrcuct :%b",CPU.Instruction_Memory.instr_o);*/
 
     //debug messages
 
     // print PC
     $fdisplay(outfile, "cycle = %d, Start = %d, Stall = %d, Flush = %d\nPC = %d", counter, Start, stall, flush, CPU.PC.pc_o);
-    $fdisplay(outfile, "mux1 select = %d: %d, mux2 select = %d: %d",CPU.mux1.select_i,CPU.mux1.data_o,CPU.mux2.select_i,CPU.mux2.data_o);
+    /*$fdisplay(outfile, "mux1 select = %d: %d, mux2 select = %d: %d",CPU.mux1.select_i,CPU.mux1.data_o,CPU.mux2.select_i,CPU.mux2.data_o);
     $fdisplay(outfile, "Instruction = | OP || RS|| RT|| RD||   imme  |\nInstruction = %b",CPU.Instruction_Memory.instr_o);
     $fdisplay(outfile, "Add_PC = %d, Adder = %d",CPU.inst_addr,CPU.Add_PC_o);
     $fdisplay(outfile, "Stage1:\n");
@@ -180,7 +181,7 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\tRD Addr   :%b",CPU.Stage4.RDaddr_o);
     $fdisplay(outfile, "\tLw Data   :%b",CPU.Stage4.Data1_o);
     $fdisplay(outfile, "\tALUOutput :%b",CPU.Stage4.Data2_o);
-	 $fdisplay(outfile, "------");
+	 $fdisplay(outfile, "------");*/
 	
     // print Registers
     $fdisplay(outfile, "Registers");

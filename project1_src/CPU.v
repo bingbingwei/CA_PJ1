@@ -21,7 +21,7 @@ wire  [31:0]   jump_addr;
 wire  [31:0]   Adder_o;
 wire  [31:0]   signExtend_o;
 wire  [31:0]   ALU_o;
-wire  [31:0]   mux1_o, mux3_o, mux4_o, mux5_o, mux6_o, mux7_o;
+wire  [31:0]   mux1_o, mux3_o, mux4_o, mux5_o, mux6_o, mux7_o, mux9_o, mux10_o;
 wire  [4:0]    mux8_o;
 
 wire  [31:0]   Stage1_PC_o;
@@ -44,6 +44,7 @@ wire  [2:0]    ALUCtrl_o;
 wire  [31:0]   Data_Memory_o;
 
 wire  [1:0]    Forwarding_Unit_mux6_o, Forwarding_Unit_mux7_o;
+wire          Forwarding_Unit_mux9_o, Forwarding_Unit_mux10_o;
 
 Control Control(
     .Op_i           (inst[31:26]),
@@ -172,12 +173,16 @@ Forwarding_Unit Forwarding_Unit(
 
     .Regdst_i_WB(Stage4_RDaddr_o),//three line -> use wire
     .Regdst_i_M(Stage3_RDaddr_o),//three line -> use wire
-    .RSaddr_i(Stage2_RSaddr_o),
-    .RTaddr_i(Stage2_RTaddr_o),//four line -> use wire
+    .EX_RSaddr_i(Stage2_RSaddr_o),
+    .EX_RTaddr_i(Stage2_RTaddr_o),//four line -> use wire
+    .ID_RSaddr_i(inst[25:21]),
+    .ID_RTaddr_i(inst[20:16]),
     .Stage4_RegWrite_i(Stage4_RegWrite_o),
     .Stage3_RegWrite_i(Stage4_RegWrite_o),
     .mux7_o(Forwarding_Unit_mux7_o),
-    .mux6_o(Forwarding_Unit_mux6_o)
+    .mux6_o(Forwarding_Unit_mux6_o),
+    .mux9_o(Forwarding_Unit_mux9_o),
+    .mux10_o(Forwarding_Unit_mux10_o)
 );
 
 Stage4 Stage4(
@@ -241,9 +246,9 @@ Stage2 Stage2(
     .clk_i(clk_i),
     
     //other 7*2 -> 6*2 (有一條可以不用理他)
-    .RSdata_i(RSdata),//three line -> use wire
+    .RSdata_i(mux9_o),//three line -> use wire
     .RSdata_o(Stage2_RSdata_o),
-    .RTdata_i(RTdata),//three line -> use wire
+    .RTdata_i(mux10_o),//three line -> use wire
     .RTdata_o(Stage2_RTdata_o),
     
     .Sign_extend_i(signExtend_o),
@@ -291,8 +296,8 @@ Hazard_Detection_Unit HD_Unit(
 );
 
 Equal Equal(
-    .data1_i(RSdata),//three line -> use wire
-    .data2_i(RTdata),//three line -> use wire
+    .data1_i(mux9_o),//three line -> use wire
+    .data2_i(mux10_o),//three line -> use wire
     .data_o(equal_o)
 );
 
@@ -300,6 +305,21 @@ JumpAddr JumpAddr(
     .inst_26(inst[25:0]),
     .mux1_o_3(mux1_o[31:28]),
     .jump_addr(jump_addr)    
+);
+
+MUX32 mux9(
+   .data1_i(RSdata),
+   .data2_i(mux5_o),
+   .select_i(Forwarding_Unit_mux9_o),
+   .data_o(mux9_o)
+);
+
+MUX32 mux10(
+   .data1_i(RTdata),
+   .data2_i(mux5_o),
+   .select_i(Forwarding_Unit_mux10_o),
+   .data_o(mux10_o)
+
 );
 
 endmodule
