@@ -73,7 +73,7 @@ initial begin
 
     
     // Load instructions into instruction memory
-    $readmemb("instruction.txt", CPU.Instruction_Memory.memory);
+    $readmemb("Fibonacci_instruction.txt", CPU.Instruction_Memory.memory);
     
     $fdisplay(outfile, "%d%d%d%d%d", counter, Start, stall, flush, CPU.PC.pc_o);
 
@@ -95,7 +95,7 @@ initial begin
 end
   
 always@(posedge Clk) begin
-    if(counter == 30)    // stop after 30 cycles
+    if(counter == 33)    // stop after 30 cycles
         $stop;
 
     // put in your own signal to count stall and flush
@@ -150,6 +150,11 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\tPC        :%b",CPU.HD_Unit.HD_o_PC);
     $fdisplay(outfile, "\tStage1    :%b",CPU.HD_Unit.HD_o_Stage1);
     $fdisplay(outfile, "\tmux3      :%b",CPU.HD_Unit.HD_o_mux3);
+
+    $fdisplay(outfile, "ALU:\n");
+    $fdisplay(outfile, "\tALUCtrl_o :%b",CPU.ALUCtrl_o);
+    $fdisplay(outfile, "\tALU data1 :%b",CPU.mux6_o);
+    $fdisplay(outfile, "\tALU data2 :%b",CPU.mux4_o);
 
     $fdisplay(outfile, "Stage3:\n");
     $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o-12);

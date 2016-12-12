@@ -4,27 +4,27 @@ cycle =           0
 Stage0:
 
 	PC:         0
-	instrcuct :00000000000000000100000000100000
+	instrcuct :00100000000001000000000000000000
 cycle =           0, Start = 1, Stall =           0, Flush =           0
 PC =          0
 mux1 select = 0:          4, mux2 select = 0:          4
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000100000000100000
+Instruction = 00100000000001000000000000000000
 Add_PC =          0, Adder =          4
 Stage1:
 
 	PC:4294967292
-	instrcuct :00000000000000000100000000100000
+	instrcuct :00100000000001000000000000000000
 	data1_o_1 :00000000000000000000000000000100
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
 	pc_o      :         0
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
 	PC:4294967288
@@ -43,6 +43,11 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :xxx
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
 	PC:4294967284
@@ -94,38 +99,38 @@ cycle =           1
 Stage0:
 
 	PC:         4
-	instrcuct :00100000000010010000000000001010
+	instrcuct :00100000000010000000000000000000
 cycle =           1, Start = 1, Stall =           0, Flush =           0
 PC =          4
 mux1 select = 0:          8, mux2 select = 0:          8
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00100000000010010000000000001010
+Instruction = 00100000000010000000000000000000
 Add_PC =          4, Adder =          8
 Stage1:
 
 	PC:         0
-	instrcuct :00000000000000000100000000100000
+	instrcuct :00100000000001000000000000000000
 	data1_o_1 :00000000000000000000000000001000
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
 	pc_o      :         4
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
 	PC:4294967292
-	RegDst_o_2:1
+	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000100000000100000
+	immediate :00000000000000000000000000000000
 	RS Addr   :00000
-	RT Addr   :00000
-	RD Addr   :01000
-	function  :100000
+	RT Addr   :00100
+	RD Addr   :00000
+	function  :000000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -133,6 +138,11 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
 	PC:4294967288
@@ -184,17 +194,17 @@ cycle =           2
 Stage0:
 
 	PC:         8
-	instrcuct :10101101000000000000000000000000
+	instrcuct :00100000000010010000000000000001
 cycle =           2, Start = 1, Stall =           0, Flush =           0
 PC =          8
 mux1 select = 0:         12, mux2 select = 0:         12
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 10101101000000000000000000000000
+Instruction = 00100000000010010000000000000001
 Add_PC =          8, Adder =         12
 Stage1:
 
 	PC:         4
-	instrcuct :00100000000010010000000000001010
+	instrcuct :00100000000010000000000000000000
 	data1_o_1 :00000000000000000000000000001100
 	Control_in:001000
 	Control_o :00000000000000000000000001010001
@@ -208,14 +218,14 @@ mux3:
 Stage2:
 
 	PC:         0
-	RegDst_o_2:1
+	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000100000000100000
+	immediate :00000000000000000000000000000000
 	RS Addr   :00000
-	RT Addr   :00000
-	RD Addr   :01000
-	function  :100000
+	RT Addr   :00100
+	RD Addr   :00000
+	function  :000000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -223,6 +233,11 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
 	PC:4294967292
@@ -232,7 +247,7 @@ Stage3:
 	RegWrite  :1
 	ALUOutput :00000000000000000000000000000000
 	Mux7Output:00000000000000000000000000000000
-	RD Addr   :01000
+	RD Addr   :00100
 Data Memory:
 
 	address   :00000000000000000000000000000000
@@ -274,38 +289,38 @@ cycle =           3
 Stage0:
 
 	PC:        12
-	instrcuct :10101101000010010000000000000100
+	instrcuct :00100000000100010000000000000000
 cycle =           3, Start = 1, Stall =           0, Flush =           0
 PC =         12
 mux1 select = 0:         16, mux2 select = 0:         16
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 10101101000010010000000000000100
+Instruction = 00100000000100010000000000000000
 Add_PC =         12, Adder =         16
 Stage1:
 
 	PC:         8
-	instrcuct :10101101000000000000000000000000
+	instrcuct :00100000000010010000000000000001
 	data1_o_1 :00000000000000000000000000010000
-	Control_in:101011
-	Control_o :00000000000000000000000001011000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
 	pc_o      :        12
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000001011000
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
 	PC:         4
 	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000001010
+	immediate :00000000000000000000000000000000
 	RS Addr   :00000
-	RT Addr   :01001
+	RT Addr   :01000
 	RD Addr   :00000
-	function  :001010
+	function  :000000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -313,6 +328,11 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
 	PC:         0
@@ -322,7 +342,7 @@ Stage3:
 	RegWrite  :1
 	ALUOutput :00000000000000000000000000000000
 	Mux7Output:00000000000000000000000000000000
-	RD Addr   :01000
+	RD Addr   :00100
 Data Memory:
 
 	address   :00000000000000000000000000000000
@@ -335,7 +355,7 @@ Stage4:
 	PC:4294967292
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01000
+	RD Addr   :00100
 	Lw Data   :00000000000000000000000000000000
 	ALUOutput :00000000000000000000000000000000
 ------
@@ -364,38 +384,38 @@ cycle =           4
 Stage0:
 
 	PC:        16
-	instrcuct :10001101000011010000000000000100
+	instrcuct :00100000000100100000000000000001
 cycle =           4, Start = 1, Stall =           0, Flush =           0
 PC =         16
 mux1 select = 0:         20, mux2 select = 0:         20
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 10001101000011010000000000000100
+Instruction = 00100000000100100000000000000001
 Add_PC =         16, Adder =         20
 Stage1:
 
 	PC:        12
-	instrcuct :10101101000010010000000000000100
+	instrcuct :00100000000100010000000000000000
 	data1_o_1 :00000000000000000000000000010100
-	Control_in:101011
-	Control_o :00000000000000000000000001011000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
 	pc_o      :        16
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000001011000
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
 	PC:         8
 	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
-	RS Addr   :01000
-	RT Addr   :00000
+	immediate :00000000000000000000000000000001
+	RS Addr   :00000
+	RT Addr   :01001
 	RD Addr   :00000
-	function  :000000
+	function  :000001
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -403,6 +423,11 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
 	PC:         4
@@ -410,12 +435,12 @@ Stage3:
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000000
 	Mux7Output:00000000000000000000000000000000
-	RD Addr   :01001
+	RD Addr   :01000
 Data Memory:
 
-	address   :00000000000000000000000000001010
+	address   :00000000000000000000000000000000
 	mem write :0
 	mem read  :0
 	write data:00000000000000000000000000000000
@@ -425,7 +450,7 @@ Stage4:
 	PC:         0
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01000
+	RD Addr   :00100
 	Lw Data   :00000000000000000000000000000000
 	ALUOutput :00000000000000000000000000000000
 ------
@@ -454,59 +479,64 @@ cycle =           5
 Stage0:
 
 	PC:        20
-	instrcuct :00000001101010010111100000100000
+	instrcuct :10001100100100000000000000000000
 cycle =           5, Start = 1, Stall =           0, Flush =           0
 PC =         20
 mux1 select = 0:         24, mux2 select = 0:         24
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000001101010010111100000100000
+Instruction = 10001100100100000000000000000000
 Add_PC =         20, Adder =         24
 Stage1:
 
 	PC:        16
-	instrcuct :10001101000011010000000000000100
+	instrcuct :00100000000100100000000000000001
 	data1_o_1 :00000000000000000000000000011000
-	Control_in:100011
-	Control_o :00000000000000000000000001010111
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
 	pc_o      :        20
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000001010111
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
 	PC:        12
 	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000100
-	RS Addr   :01000
-	RT Addr   :01001
+	immediate :00000000000000000000000000000000
+	RS Addr   :00000
+	RT Addr   :10001
 	RD Addr   :00000
-	function  :000100
-	memread   :1
+	function  :000000
+	memread   :0
 	memread   :0
 Hazard Detection:
 
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
 	PC:         8
-	MemWrite  :1
+	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
-	RegWrite  :0
-	ALUOutput :00000000000000000000000000000000
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000001
 	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	RD Addr   :01001
 Data Memory:
 
-	address   :00000000000000000000000000000000
-	mem write :1
+	address   :00000000000000000000000000000001
+	mem write :0
 	mem read  :0
 	write data:00000000000000000000000000000000
 	read data :00000000000000000000000000000000
@@ -515,9 +545,9 @@ Stage4:
 	PC:         4
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01001
+	RD Addr   :01000
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000000
 ------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
@@ -544,81 +574,86 @@ cycle =           6
 Stage0:
 
 	PC:        24
-	instrcuct :00100000000010100000000000001101
+	instrcuct :00100010000101000000000000000000
 cycle =           6, Start = 1, Stall =           0, Flush =           0
 PC =         24
 mux1 select = 0:         28, mux2 select = 0:         28
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00100000000010100000000000001101
+Instruction = 00100010000101000000000000000000
 Add_PC =         24, Adder =         28
 Stage1:
 
 	PC:        20
-	instrcuct :00000001101010010111100000100000
+	instrcuct :10001100100100000000000000000000
 	data1_o_1 :00000000000000000000000000011100
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
 PC:
 
 	pc_o      :        24
-	HD_i      :1
+	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000000000000
+	mux3_o    :00000000000000000000000001010111
 Stage2:
 
 	PC:        16
 	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000100
-	RS Addr   :01000
-	RT Addr   :01101
+	immediate :00000000000000000000000000000001
+	RS Addr   :00000
+	RT Addr   :10010
 	RD Addr   :00000
-	function  :000100
-	memread   :0
+	function  :000001
 	memread   :1
+	memread   :0
 Hazard Detection:
 
-	PC        :1
-	Stage1    :1
-	mux3      :1
+	PC        :0
+	Stage1    :0
+	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
 	PC:        12
-	MemWrite  :1
+	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
-	RegWrite  :0
-	ALUOutput :00000000000000000000000000000100
-	Mux7Output:00000000000000000000000000001010
-	RD Addr   :01001
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000000
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :10001
 Data Memory:
 
-	address   :00000000000000000000000000000100
-	mem write :1
+	address   :00000000000000000000000000000000
+	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000001010
+	write data:00000000000000000000000000000000
 	read data :00000000000000000000000000000000
 Stage4:
 
 	PC:         8
 	MemtoReg  :0
-	RegWrite  :0
-	RD Addr   :00000
+	RegWrite  :1
+	RD Addr   :01001
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000001
 ------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
 R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
+Data Memory: 0x00 =          5
 Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
@@ -633,83 +668,88 @@ cycle =           7
 
 Stage0:
 
-	PC:        24
-	instrcuct :00100000000010100000000000001101
+	PC:        28
+	instrcuct :00000000000000000000000000100000
 cycle =           7, Start = 1, Stall =           0, Flush =           0
-PC =         24
-mux1 select = 0:         28, mux2 select = 0:         28
+PC =         28
+mux1 select = 0:         32, mux2 select = 0:         32
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00100000000010100000000000001101
-Add_PC =         24, Adder =         28
+Instruction = 00000000000000000000000000100000
+Add_PC =         28, Adder =         32
 Stage1:
 
-	PC:        20
-	instrcuct :00000001101010010111100000100000
-	data1_o_1 :00000000000000000000000000011100
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        24
+	instrcuct :00100010000101000000000000000000
+	data1_o_1 :00000000000000000000000000100000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
-	pc_o      :        24
-	HD_i      :0
+	pc_o      :        28
+	HD_i      :1
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000000000000
 Stage2:
 
-	PC:        16
+	PC:        20
 	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000001010
-	immediate :00000000000000000111100000100000
-	RS Addr   :01101
-	RT Addr   :01001
-	RD Addr   :01111
-	function  :100000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000000
+	RS Addr   :00100
+	RT Addr   :10000
+	RD Addr   :00000
+	function  :000000
 	memread   :0
-	memread   :0
+	memread   :1
 Hazard Detection:
 
-	PC        :0
-	Stage1    :0
-	mux3      :0
+	PC        :1
+	Stage1    :1
+	mux3      :1
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        12
+	PC:        16
 	MemWrite  :0
-	Mem Read  :1
-	MemtoReg  :1
+	Mem Read  :0
+	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000100
+	ALUOutput :00000000000000000000000000000001
 	Mux7Output:00000000000000000000000000000000
-	RD Addr   :01101
+	RD Addr   :10010
 Data Memory:
 
-	address   :00000000000000000000000000000100
+	address   :00000000000000000000000000000001
 	mem write :0
-	mem read  :1
+	mem read  :0
 	write data:00000000000000000000000000000000
-	read data :00000000000000000000000000001010
+	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:         8
+	PC:        12
 	MemtoReg  :0
-	RegWrite  :0
-	RD Addr   :01001
+	RegWrite  :1
+	RD Addr   :10001
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000100
+	ALUOutput :00000000000000000000000000000000
 ------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
 R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -724,17 +764,17 @@ cycle =           8
 Stage0:
 
 	PC:        28
-	instrcuct :00000001001010010101100000011000
+	instrcuct :00000000000000000000000000100000
 cycle =           8, Start = 1, Stall =           0, Flush =           0
 PC =         28
 mux1 select = 0:         32, mux2 select = 0:         32
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000001001010010101100000011000
+Instruction = 00000000000000000000000000100000
 Add_PC =         28, Adder =         32
 Stage1:
 
 	PC:        24
-	instrcuct :00100000000010100000000000001101
+	instrcuct :00100010000101000000000000000000
 	data1_o_1 :00000000000000000000000000100000
 	Control_in:001000
 	Control_o :00000000000000000000000001010001
@@ -748,14 +788,14 @@ mux3:
 Stage2:
 
 	PC:        20
-	RegDst_o_2:1
+	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000001010
-	immediate :00000000000000000111100000100000
-	RS Addr   :01101
-	RT Addr   :01001
-	RD Addr   :01111
-	function  :100000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000000
+	RS Addr   :10000
+	RT Addr   :10100
+	RD Addr   :00000
+	function  :000000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -763,43 +803,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :101
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
 	PC:        16
 	MemWrite  :0
-	Mem Read  :0
-	MemtoReg  :0
-	RegWrite  :0
-	ALUOutput :00000000000000000000000000001010
-	Mux7Output:00000000000000000000000000001010
-	RD Addr   :01001
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000000
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :10000
 Data Memory:
 
-	address   :00000000000000000000000000001010
+	address   :00000000000000000000000000000000
 	mem write :0
-	mem read  :0
-	write data:00000000000000000000000000001010
-	read data :00000000000000000000000000000000
+	mem read  :1
+	write data:00000000000000000000000000000000
+	read data :00000000000000000000000000000101
 Stage4:
 
 	PC:        12
-	MemtoReg  :1
+	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01101
-	Lw Data   :00000000000000000000000000001010
-	ALUOutput :00000000000000000000000000000100
+	RD Addr   :10010
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000001
 ------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
 R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -814,17 +859,17 @@ cycle =           9
 Stage0:
 
 	PC:        32
-	instrcuct :00001000000000000000000000001011
+	instrcuct :00000010000010011000000000100010
 cycle =           9, Start = 1, Stall =           0, Flush =           0
 PC =         32
 mux1 select = 0:         36, mux2 select = 0:         36
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00001000000000000000000000001011
+Instruction = 00000010000010011000000000100010
 Add_PC =         32, Adder =         36
 Stage1:
 
 	PC:        28
-	instrcuct :00000001001010010101100000011000
+	instrcuct :00000000000000000000000000100000
 	data1_o_1 :00000000000000000000000000100100
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
@@ -841,11 +886,11 @@ Stage2:
 	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000001101
-	RS Addr   :00000
-	RT Addr   :01010
+	immediate :00000000000000000000000000000000
+	RS Addr   :10000
+	RT Addr   :10100
 	RD Addr   :00000
-	function  :001101
+	function  :000000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -853,43 +898,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000101
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
 	PC:        20
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
-	RegWrite  :1
-	ALUOutput :00000000000000000000000000010100
-	Mux7Output:00000000000000000000000000001010
-	RD Addr   :01111
+	RegWrite  :0
+	ALUOutput :00000000000000000000000000000000
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :10100
 Data Memory:
 
-	address   :00000000000000000000000000010100
+	address   :00000000000000000000000000000000
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000001010
+	write data:00000000000000000000000000000000
 	read data :00000000000000000000000000000000
 Stage4:
 
 	PC:        16
-	MemtoReg  :0
-	RegWrite  :0
-	RD Addr   :01001
-	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000001010
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :10000
+	Lw Data   :00000000000000000000000000000101
+	ALUOutput :00000000000000000000000000000000
 ------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          0, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -904,38 +954,38 @@ cycle =          10
 Stage0:
 
 	PC:        36
-	instrcuct :00100001001010010000000000000001
-cycle =          10, Start = 1, Stall =           0, Flush =           1
+	instrcuct :00000010001100101000100000100000
+cycle =          10, Start = 1, Stall =           0, Flush =           0
 PC =         36
-mux1 select = 0:         40, mux2 select = 1:         44
+mux1 select = 0:         40, mux2 select = 0:         40
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00100001001010010000000000000001
+Instruction = 00000010001100101000100000100000
 Add_PC =         36, Adder =         40
 Stage1:
 
 	PC:        32
-	instrcuct :00001000000000000000000000001011
+	instrcuct :00000010000010011000000000100010
 	data1_o_1 :00000000000000000000000000101000
-	Control_in:000010
-	Control_o :00000000000000000000000001000000
+	Control_in:000000
+	Control_o :00000000000000000000000010000001
 PC:
 
 	pc_o      :        36
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000001000000
+	mux3_o    :00000000000000000000000010000001
 Stage2:
 
 	PC:        28
 	RegDst_o_2:1
-	RS Data   :00000000000000000000000000001010
-	RT Data   :00000000000000000000000000001010
-	immediate :00000000000000000101100000011000
-	RS Addr   :01001
-	RT Addr   :01001
-	RD Addr   :01011
-	function  :011000
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000100000
+	RS Addr   :00000
+	RT Addr   :00000
+	RD Addr   :00000
+	function  :100000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -943,6 +993,11 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
 	PC:        24
@@ -950,12 +1005,12 @@ Stage3:
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000001101
+	ALUOutput :00000000000000000000000000000101
 	Mux7Output:00000000000000000000000000000000
-	RD Addr   :01010
+	RD Addr   :10100
 Data Memory:
 
-	address   :00000000000000000000000000001101
+	address   :00000000000000000000000000000101
 	mem write :0
 	mem read  :0
 	write data:00000000000000000000000000000000
@@ -964,22 +1019,22 @@ Stage4:
 
 	PC:        20
 	MemtoReg  :0
-	RegWrite  :1
-	RD Addr   :01111
+	RegWrite  :0
+	RD Addr   :10100
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000010100
+	ALUOutput :00000000000000000000000000000000
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          5, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          0, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -993,39 +1048,39 @@ cycle =          11
 
 Stage0:
 
-	PC:        44
-	instrcuct :00000001010010010101000000100010
-cycle =          11, Start = 1, Stall =           0, Flush =           1
-PC =         44
-mux1 select = 0:         48, mux2 select = 0:         48
+	PC:        40
+	instrcuct :00100010010100110000000000000000
+cycle =          11, Start = 1, Stall =           0, Flush =           0
+PC =         40
+mux1 select = 0:         44, mux2 select = 0:         44
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000001010010010101000000100010
-Add_PC =         44, Adder =         48
+Instruction = 00100010010100110000000000000000
+Add_PC =         40, Adder =         44
 Stage1:
 
-	PC:        40
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000000110000
+	PC:        36
+	instrcuct :00000010001100101000100000100000
+	data1_o_1 :00000000000000000000000000101100
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :        44
+	pc_o      :        40
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:        36
-	RegDst_o_2:0
-	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000001011
-	RS Addr   :00000
-	RT Addr   :00000
-	RD Addr   :00000
-	function  :001011
+	PC:        32
+	RegDst_o_2:1
+	RS Data   :00000000000000000000000000000101
+	RT Data   :00000000000000000000000000000001
+	immediate :00000000000000001000000000100010
+	RS Addr   :10000
+	RT Addr   :01001
+	RD Addr   :10000
+	function  :100010
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1033,43 +1088,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :001
+	ALU data1 :00000000000000000000000000000101
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
-	PC:        32
+	PC:        28
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000001100100
-	Mux7Output:00000000000000000000000000001010
-	RD Addr   :01011
+	ALUOutput :00000000000000000000000000000000
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :00000
 Data Memory:
 
-	address   :00000000000000000000000001100100
+	address   :00000000000000000000000000000000
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000001010
+	write data:00000000000000000000000000000000
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        28
+	PC:        24
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01010
+	RD Addr   :10100
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000001101
+	ALUOutput :00000000000000000000000000000101
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          5, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          0, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1083,39 +1143,39 @@ cycle =          12
 
 Stage0:
 
-	PC:        48
-	instrcuct :00000001001010100101100000100100
-cycle =          12, Start = 1, Stall =           0, Flush =           1
-PC =         48
-mux1 select = 0:         52, mux2 select = 0:         52
+	PC:        44
+	instrcuct :00100010001100100000000000000000
+cycle =          12, Start = 1, Stall =           0, Flush =           0
+PC =         44
+mux1 select = 0:         48, mux2 select = 0:         48
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000001001010100101100000100100
-Add_PC =         48, Adder =         52
+Instruction = 00100010001100100000000000000000
+Add_PC =         44, Adder =         48
 Stage1:
 
-	PC:        44
-	instrcuct :00000001010010010101000000100010
-	data1_o_1 :00000000000000000000000000110100
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        40
+	instrcuct :00100010010100110000000000000000
+	data1_o_1 :00000000000000000000000000110000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
-	pc_o      :        48
+	pc_o      :        44
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
-	PC:        40
+	PC:        36
 	RegDst_o_2:1
 	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
-	RD Addr   :00000
-	function  :000000
+	RT Data   :00000000000000000000000000000001
+	immediate :00000000000000001000100000100000
+	RS Addr   :10001
+	RT Addr   :10010
+	RD Addr   :10001
+	function  :100000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1123,43 +1183,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
-	PC:        36
+	PC:        32
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
-	RegWrite  :0
-	ALUOutput :00000000000000000000000000000000
-	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10000
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000100
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000000
+	write data:00000000000000000000000000000001
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        32
+	PC:        28
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01011
+	RD Addr   :00000
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000001100100
+	ALUOutput :00000000000000000000000000000000
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =         13, R18(s2) =          0, R26(k0) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          5, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          0, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1173,39 +1238,39 @@ cycle =          13
 
 Stage0:
 
-	PC:        52
-	instrcuct :00000001010010110110000000100101
-cycle =          13, Start = 1, Stall =           0, Flush =           1
-PC =         52
-mux1 select = 0:         56, mux2 select = 0:         56
+	PC:        48
+	instrcuct :00100010011100010000000000000000
+cycle =          13, Start = 1, Stall =           0, Flush =           0
+PC =         48
+mux1 select = 0:         52, mux2 select = 0:         52
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000001010010110110000000100101
-Add_PC =         52, Adder =         56
+Instruction = 00100010011100010000000000000000
+Add_PC =         48, Adder =         52
 Stage1:
 
-	PC:        48
-	instrcuct :00000001001010100101100000100100
-	data1_o_1 :00000000000000000000000000111000
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        44
+	instrcuct :00100010001100100000000000000000
+	data1_o_1 :00000000000000000000000000110100
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
-	pc_o      :        52
+	pc_o      :        48
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
-	PC:        44
-	RegDst_o_2:1
-	RS Data   :00000000000000000000000000001101
-	RT Data   :00000000000000000000000000001010
-	immediate :00000000000000000101000000100010
-	RS Addr   :01010
-	RT Addr   :01001
-	RD Addr   :01010
-	function  :100010
+	PC:        40
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000001
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000000
+	RS Addr   :10010
+	RT Addr   :10011
+	RD Addr   :00000
+	function  :000000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1213,43 +1278,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000001
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        40
+	PC:        36
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000000
-	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	ALUOutput :00000000000000000000000000000001
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10001
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000001
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000000
+	write data:00000000000000000000000000000001
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        36
+	PC:        32
 	MemtoReg  :0
-	RegWrite  :0
-	RD Addr   :00000
+	RegWrite  :1
+	RD Addr   :10000
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000100
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =         13, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =        100, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          5, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          0, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1263,39 +1333,39 @@ cycle =          14
 
 Stage0:
 
-	PC:        56
-	instrcuct :00000000000000000000000000000000
-cycle =          14, Start = 1, Stall =           0, Flush =           1
-PC =         56
-mux1 select = 0:         60, mux2 select = 0:         60
+	PC:        52
+	instrcuct :00010010000010000000000000000001
+cycle =          14, Start = 1, Stall =           0, Flush =           0
+PC =         52
+mux1 select = 0:         56, mux2 select = 0:         56
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         56, Adder =         60
+Instruction = 00010010000010000000000000000001
+Add_PC =         52, Adder =         56
 Stage1:
 
-	PC:        52
-	instrcuct :00000001010010110110000000100101
-	data1_o_1 :00000000000000000000000000111100
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        48
+	instrcuct :00100010011100010000000000000000
+	data1_o_1 :00000000000000000000000000111000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
-	pc_o      :        56
+	pc_o      :        52
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
-	PC:        48
-	RegDst_o_2:1
-	RS Data   :00000000000000000000000000001010
-	RT Data   :00000000000000000000000000001101
-	immediate :00000000000000000101100000100100
-	RS Addr   :01001
-	RT Addr   :01010
-	RD Addr   :01011
-	function  :100100
+	PC:        44
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000001
+	immediate :00000000000000000000000000000000
+	RS Addr   :10001
+	RT Addr   :10010
+	RD Addr   :00000
+	function  :000000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1303,43 +1373,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000001
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        44
+	PC:        40
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000011
-	Mux7Output:00000000000000000000000000001010
-	RD Addr   :01010
+	ALUOutput :00000000000000000000000000000001
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :10011
 Data Memory:
 
-	address   :00000000000000000000000000000011
+	address   :00000000000000000000000000000001
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000001010
+	write data:00000000000000000000000000000000
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        40
+	PC:        36
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :00000
+	RD Addr   :10001
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000001
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =         13, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =        100, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          0, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1353,39 +1428,39 @@ cycle =          15
 
 Stage0:
 
-	PC:        60
-	instrcuct :00000000000000000000000000000000
-cycle =          15, Start = 1, Stall =           0, Flush =           1
-PC =         60
-mux1 select = 0:         64, mux2 select = 0:         64
+	PC:        56
+	instrcuct :00001000000000000000000000000111
+cycle =          15, Start = 1, Stall =           0, Flush =           0
+PC =         56
+mux1 select = 0:         60, mux2 select = 0:         60
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         60, Adder =         64
+Instruction = 00001000000000000000000000000111
+Add_PC =         56, Adder =         60
 Stage1:
 
-	PC:        56
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001000000
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        52
+	instrcuct :00010010000010000000000000000001
+	data1_o_1 :00000000000000000000000000111100
+	Control_in:000100
+	Control_o :00000000000000000000000001110000
 PC:
 
-	pc_o      :        60
+	pc_o      :        56
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001110000
 Stage2:
 
-	PC:        52
-	RegDst_o_2:1
-	RS Data   :00000000000000000000000000001101
-	RT Data   :00000000000000000000000001100100
-	immediate :00000000000000000110000000100101
-	RS Addr   :01010
-	RT Addr   :01011
-	RD Addr   :01100
-	function  :100101
+	PC:        48
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000000
+	RS Addr   :10011
+	RT Addr   :10001
+	RD Addr   :00000
+	function  :000000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1393,43 +1468,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000001
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        48
+	PC:        44
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000010
-	Mux7Output:00000000000000000000000000000011
-	RD Addr   :01011
+	ALUOutput :00000000000000000000000000000001
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10010
 Data Memory:
 
-	address   :00000000000000000000000000000010
+	address   :00000000000000000000000000000001
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000011
+	write data:00000000000000000000000000000001
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        44
+	PC:        40
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01010
+	RD Addr   :10011
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000011
+	ALUOutput :00000000000000000000000000000001
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =         13, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =        100, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1443,39 +1523,39 @@ cycle =          16
 
 Stage0:
 
-	PC:        64
-	instrcuct :00000000000000000000000000000000
+	PC:        60
+	instrcuct :10101100100100010000000000000100
 cycle =          16, Start = 1, Stall =           0, Flush =           1
-PC =         64
-mux1 select = 0:         68, mux2 select = 0:         68
+PC =         60
+mux1 select = 0:         64, mux2 select = 1:         28
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         64, Adder =         68
+Instruction = 10101100100100010000000000000100
+Add_PC =         60, Adder =         64
 Stage1:
 
-	PC:        60
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001000100
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        56
+	instrcuct :00001000000000000000000000000111
+	data1_o_1 :00000000000000000000000001000000
+	Control_in:000010
+	Control_o :00000000000000000000000001000000
 PC:
 
-	pc_o      :        64
+	pc_o      :        60
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001000000
 Stage2:
 
-	PC:        56
-	RegDst_o_2:1
-	RS Data   :00000000000000000000000000000000
+	PC:        52
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000100
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
+	immediate :00000000000000000000000000000001
+	RS Addr   :10000
+	RT Addr   :01000
 	RD Addr   :00000
-	function  :000000
+	function  :000001
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1483,43 +1563,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :001
+	ALU data1 :00000000000000000000000000000100
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
-	PC:        52
+	PC:        48
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000011
-	Mux7Output:00000000000000000000000000000010
-	RD Addr   :01100
+	ALUOutput :00000000000000000000000000000001
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :10001
 Data Memory:
 
-	address   :00000000000000000000000000000011
+	address   :00000000000000000000000000000001
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000010
+	write data:00000000000000000000000000000000
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        48
+	PC:        44
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01011
+	RD Addr   :10010
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000010
+	ALUOutput :00000000000000000000000000000001
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =        100, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1533,39 +1618,39 @@ cycle =          17
 
 Stage0:
 
-	PC:        68
-	instrcuct :00000000000000000000000000000000
+	PC:        28
+	instrcuct :00000000000000000000000000100000
 cycle =          17, Start = 1, Stall =           0, Flush =           1
-PC =         68
-mux1 select = 0:         72, mux2 select = 0:         72
+PC =         28
+mux1 select = 0:         32, mux2 select = 0:         32
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         68, Adder =         72
+Instruction = 00000000000000000000000000100000
+Add_PC =         28, Adder =         32
 Stage1:
 
-	PC:        64
+	PC:        24
 	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001001000
+	data1_o_1 :00000000000000000000000000100000
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :        68
+	pc_o      :        28
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:        60
-	RegDst_o_2:1
+	PC:        20
+	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
+	immediate :00000000000000000000000000000111
 	RS Addr   :00000
 	RT Addr   :00000
 	RD Addr   :00000
-	function  :000000
+	function  :000111
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1573,43 +1658,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :101
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000111
 Stage3:
 
-	PC:        56
+	PC:        16
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
-	RegWrite  :1
-	ALUOutput :00000000000000000000000000000000
+	RegWrite  :0
+	ALUOutput :00000000000000000000000000000011
 	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	RD Addr   :01000
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000011
 	mem write :0
 	mem read  :0
 	write data:00000000000000000000000000000000
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        52
+	PC:        12
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :01100
+	RD Addr   :10001
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000011
+	ALUOutput :00000000000000000000000000000001
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1623,31 +1713,31 @@ cycle =          18
 
 Stage0:
 
-	PC:        72
-	instrcuct :00000000000000000000000000000000
+	PC:        32
+	instrcuct :00000010000010011000000000100010
 cycle =          18, Start = 1, Stall =           0, Flush =           1
-PC =         72
-mux1 select = 0:         76, mux2 select = 0:         76
+PC =         32
+mux1 select = 0:         36, mux2 select = 0:         36
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         72, Adder =         76
+Instruction = 00000010000010011000000000100010
+Add_PC =         32, Adder =         36
 Stage1:
 
-	PC:        68
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001001100
+	PC:        28
+	instrcuct :00000000000000000000000000100000
+	data1_o_1 :00000000000000000000000000100100
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :        72
+	pc_o      :        32
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:        64
+	PC:        24
 	RegDst_o_2:1
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
@@ -1663,13 +1753,18 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :101
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        60
+	PC:        20
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
-	RegWrite  :1
+	RegWrite  :0
 	ALUOutput :00000000000000000000000000000000
 	Mux7Output:00000000000000000000000000000000
 	RD Addr   :00000
@@ -1682,24 +1777,24 @@ Data Memory:
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        56
+	PC:        16
 	MemtoReg  :0
-	RegWrite  :1
-	RD Addr   :00000
+	RegWrite  :0
+	RD Addr   :01000
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000011
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1713,39 +1808,39 @@ cycle =          19
 
 Stage0:
 
-	PC:        76
-	instrcuct :00000000000000000000000000000000
+	PC:        36
+	instrcuct :00000010001100101000100000100000
 cycle =          19, Start = 1, Stall =           0, Flush =           1
-PC =         76
-mux1 select = 0:         80, mux2 select = 0:         80
+PC =         36
+mux1 select = 0:         40, mux2 select = 0:         40
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         76, Adder =         80
+Instruction = 00000010001100101000100000100000
+Add_PC =         36, Adder =         40
 Stage1:
 
-	PC:        72
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001010000
+	PC:        32
+	instrcuct :00000010000010011000000000100010
+	data1_o_1 :00000000000000000000000000101000
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :        76
+	pc_o      :        36
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:        68
+	PC:        28
 	RegDst_o_2:1
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
+	immediate :00000000000000000000000000100000
 	RS Addr   :00000
 	RT Addr   :00000
 	RD Addr   :00000
-	function  :000000
+	function  :100000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1753,9 +1848,14 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        64
+	PC:        24
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
@@ -1772,24 +1872,24 @@ Data Memory:
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        60
+	PC:        20
 	MemtoReg  :0
-	RegWrite  :1
+	RegWrite  :0
 	RD Addr   :00000
 	Lw Data   :00000000000000000000000000000000
 	ALUOutput :00000000000000000000000000000000
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1803,39 +1903,39 @@ cycle =          20
 
 Stage0:
 
-	PC:        80
-	instrcuct :00000000000000000000000000000000
+	PC:        40
+	instrcuct :00100010010100110000000000000000
 cycle =          20, Start = 1, Stall =           0, Flush =           1
-PC =         80
-mux1 select = 0:         84, mux2 select = 0:         84
+PC =         40
+mux1 select = 0:         44, mux2 select = 0:         44
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         80, Adder =         84
+Instruction = 00100010010100110000000000000000
+Add_PC =         40, Adder =         44
 Stage1:
 
-	PC:        76
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001010100
+	PC:        36
+	instrcuct :00000010001100101000100000100000
+	data1_o_1 :00000000000000000000000000101100
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :        80
+	pc_o      :        40
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:        72
+	PC:        32
 	RegDst_o_2:1
-	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
-	RD Addr   :00000
-	function  :000000
+	RS Data   :00000000000000000000000000000100
+	RT Data   :00000000000000000000000000000001
+	immediate :00000000000000001000000000100010
+	RS Addr   :10000
+	RT Addr   :01001
+	RD Addr   :10000
+	function  :100010
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1843,9 +1943,14 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :001
+	ALU data1 :00000000000000000000000000000100
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
-	PC:        68
+	PC:        28
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
@@ -1862,7 +1967,7 @@ Data Memory:
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        64
+	PC:        24
 	MemtoReg  :0
 	RegWrite  :1
 	RD Addr   :00000
@@ -1870,16 +1975,16 @@ Stage4:
 	ALUOutput :00000000000000000000000000000000
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1893,39 +1998,39 @@ cycle =          21
 
 Stage0:
 
-	PC:        84
-	instrcuct :00000000000000000000000000000000
+	PC:        44
+	instrcuct :00100010001100100000000000000000
 cycle =          21, Start = 1, Stall =           0, Flush =           1
-PC =         84
-mux1 select = 0:         88, mux2 select = 0:         88
+PC =         44
+mux1 select = 0:         48, mux2 select = 0:         48
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         84, Adder =         88
+Instruction = 00100010001100100000000000000000
+Add_PC =         44, Adder =         48
 Stage1:
 
-	PC:        80
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001011000
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        40
+	instrcuct :00100010010100110000000000000000
+	data1_o_1 :00000000000000000000000000110000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
-	pc_o      :        84
+	pc_o      :        44
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
-	PC:        76
+	PC:        36
 	RegDst_o_2:1
-	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
-	RD Addr   :00000
-	function  :000000
+	RS Data   :00000000000000000000000000000001
+	RT Data   :00000000000000000000000000000001
+	immediate :00000000000000001000100000100000
+	RS Addr   :10001
+	RT Addr   :10010
+	RD Addr   :10001
+	function  :100000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -1933,26 +2038,31 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000001
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
-	PC:        72
+	PC:        32
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000000
-	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	ALUOutput :00000000000000000000000000000011
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10000
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000011
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000000
+	write data:00000000000000000000000000000001
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        68
+	PC:        28
 	MemtoReg  :0
 	RegWrite  :1
 	RD Addr   :00000
@@ -1960,16 +2070,16 @@ Stage4:
 	ALUOutput :00000000000000000000000000000000
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -1983,37 +2093,37 @@ cycle =          22
 
 Stage0:
 
-	PC:        88
-	instrcuct :00000000000000000000000000000000
+	PC:        48
+	instrcuct :00100010011100010000000000000000
 cycle =          22, Start = 1, Stall =           0, Flush =           1
-PC =         88
-mux1 select = 0:         92, mux2 select = 0:         92
+PC =         48
+mux1 select = 0:         52, mux2 select = 0:         52
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         88, Adder =         92
+Instruction = 00100010011100010000000000000000
+Add_PC =         48, Adder =         52
 Stage1:
 
-	PC:        84
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001011100
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        44
+	instrcuct :00100010001100100000000000000000
+	data1_o_1 :00000000000000000000000000110100
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
-	pc_o      :        88
+	pc_o      :        48
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
-	PC:        80
-	RegDst_o_2:1
-	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000000000
+	PC:        40
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000001
+	RT Data   :00000000000000000000000000000001
 	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
+	RS Addr   :10010
+	RT Addr   :10011
 	RD Addr   :00000
 	function  :000000
 	memread   :0
@@ -2023,43 +2133,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000001
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        76
+	PC:        36
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000000
-	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	ALUOutput :00000000000000000000000000000010
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10001
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000010
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000000
+	write data:00000000000000000000000000000001
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        72
+	PC:        32
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :00000
+	RD Addr   :10000
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000011
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          4, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -2073,37 +2188,37 @@ cycle =          23
 
 Stage0:
 
-	PC:        92
-	instrcuct :00000000000000000000000000000000
+	PC:        52
+	instrcuct :00010010000010000000000000000001
 cycle =          23, Start = 1, Stall =           0, Flush =           1
-PC =         92
-mux1 select = 0:         96, mux2 select = 0:         96
+PC =         52
+mux1 select = 0:         56, mux2 select = 0:         56
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         92, Adder =         96
+Instruction = 00010010000010000000000000000001
+Add_PC =         52, Adder =         56
 Stage1:
 
-	PC:        88
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001100000
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        48
+	instrcuct :00100010011100010000000000000000
+	data1_o_1 :00000000000000000000000000111000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
 PC:
 
-	pc_o      :        92
+	pc_o      :        52
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001010001
 Stage2:
 
-	PC:        84
-	RegDst_o_2:1
-	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000000000
+	PC:        44
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000001
+	RT Data   :00000000000000000000000000000001
 	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
+	RS Addr   :10001
+	RT Addr   :10010
 	RD Addr   :00000
 	function  :000000
 	memread   :0
@@ -2113,43 +2228,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000010
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        80
+	PC:        40
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000000
-	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	ALUOutput :00000000000000000000000000000001
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10011
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000001
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000000
+	write data:00000000000000000000000000000001
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        76
+	PC:        36
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :00000
+	RD Addr   :10001
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000010
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -2163,37 +2283,37 @@ cycle =          24
 
 Stage0:
 
-	PC:        96
-	instrcuct :00000000000000000000000000000000
+	PC:        56
+	instrcuct :00001000000000000000000000000111
 cycle =          24, Start = 1, Stall =           0, Flush =           1
-PC =         96
-mux1 select = 0:        100, mux2 select = 0:        100
+PC =         56
+mux1 select = 0:         60, mux2 select = 0:         60
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =         96, Adder =        100
+Instruction = 00001000000000000000000000000111
+Add_PC =         56, Adder =         60
 Stage1:
 
-	PC:        92
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001100100
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        52
+	instrcuct :00010010000010000000000000000001
+	data1_o_1 :00000000000000000000000000111100
+	Control_in:000100
+	Control_o :00000000000000000000000001110000
 PC:
 
-	pc_o      :        96
+	pc_o      :        56
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001110000
 Stage2:
 
-	PC:        88
-	RegDst_o_2:1
-	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000000000
+	PC:        48
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000001
+	RT Data   :00000000000000000000000000000001
 	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
+	RS Addr   :10011
+	RT Addr   :10001
 	RD Addr   :00000
 	function  :000000
 	memread   :0
@@ -2203,43 +2323,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000001
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        84
+	PC:        44
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000000
-	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	ALUOutput :00000000000000000000000000000010
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10010
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000010
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000000
+	write data:00000000000000000000000000000001
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        80
+	PC:        40
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :00000
+	RD Addr   :10011
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000001
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          2, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -2253,39 +2378,39 @@ cycle =          25
 
 Stage0:
 
-	PC:       100
-	instrcuct :00000000000000000000000000000000
-cycle =          25, Start = 1, Stall =           0, Flush =           1
-PC =        100
-mux1 select = 0:        104, mux2 select = 0:        104
+	PC:        60
+	instrcuct :10101100100100010000000000000100
+cycle =          25, Start = 1, Stall =           0, Flush =           2
+PC =         60
+mux1 select = 0:         64, mux2 select = 1:         28
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =        100, Adder =        104
+Instruction = 10101100100100010000000000000100
+Add_PC =         60, Adder =         64
 Stage1:
 
-	PC:        96
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001101000
-	Control_in:000000
-	Control_o :00000000000000000000000010000001
+	PC:        56
+	instrcuct :00001000000000000000000000000111
+	data1_o_1 :00000000000000000000000001000000
+	Control_in:000010
+	Control_o :00000000000000000000000001000000
 PC:
 
-	pc_o      :       100
+	pc_o      :        60
 	HD_i      :0
 mux3:
 
-	mux3_o    :00000000000000000000000010000001
+	mux3_o    :00000000000000000000000001000000
 Stage2:
 
-	PC:        92
-	RegDst_o_2:1
-	RS Data   :00000000000000000000000000000000
+	PC:        52
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000011
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
+	immediate :00000000000000000000000000000001
+	RS Addr   :10000
+	RT Addr   :01000
 	RD Addr   :00000
-	function  :000000
+	function  :000001
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -2293,43 +2418,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :001
+	ALU data1 :00000000000000000000000000000011
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
-	PC:        88
+	PC:        48
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
 	RegWrite  :1
-	ALUOutput :00000000000000000000000000000000
-	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	ALUOutput :00000000000000000000000000000001
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10001
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000001
 	mem write :0
 	mem read  :0
-	write data:00000000000000000000000000000000
+	write data:00000000000000000000000000000001
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        84
+	PC:        44
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :00000
+	RD Addr   :10010
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000010
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          2, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          1, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -2343,39 +2473,39 @@ cycle =          26
 
 Stage0:
 
-	PC:       104
-	instrcuct :00000000000000000000000000000000
-cycle =          26, Start = 1, Stall =           0, Flush =           1
-PC =        104
-mux1 select = 0:        108, mux2 select = 0:        108
+	PC:        28
+	instrcuct :00000000000000000000000000100000
+cycle =          26, Start = 1, Stall =           0, Flush =           2
+PC =         28
+mux1 select = 0:         32, mux2 select = 0:         32
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =        104, Adder =        108
+Instruction = 00000000000000000000000000100000
+Add_PC =         28, Adder =         32
 Stage1:
 
-	PC:       100
+	PC:        24
 	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001101100
+	data1_o_1 :00000000000000000000000000100000
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :       104
+	pc_o      :        28
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:        96
-	RegDst_o_2:1
+	PC:        20
+	RegDst_o_2:0
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
+	immediate :00000000000000000000000000000111
 	RS Addr   :00000
 	RT Addr   :00000
 	RD Addr   :00000
-	function  :000000
+	function  :000111
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -2383,43 +2513,48 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :101
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000111
 Stage3:
 
-	PC:        92
+	PC:        16
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
-	RegWrite  :1
-	ALUOutput :00000000000000000000000000000000
+	RegWrite  :0
+	ALUOutput :00000000000000000000000000000010
 	Mux7Output:00000000000000000000000000000000
-	RD Addr   :00000
+	RD Addr   :01000
 Data Memory:
 
-	address   :00000000000000000000000000000000
+	address   :00000000000000000000000000000010
 	mem write :0
 	mem read  :0
 	write data:00000000000000000000000000000000
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        88
+	PC:        12
 	MemtoReg  :0
 	RegWrite  :1
-	RD Addr   :00000
+	RD Addr   :10001
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000001
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          2, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          2, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -2433,31 +2568,31 @@ cycle =          27
 
 Stage0:
 
-	PC:       108
-	instrcuct :00000000000000000000000000000000
-cycle =          27, Start = 1, Stall =           0, Flush =           1
-PC =        108
-mux1 select = 0:        112, mux2 select = 0:        112
+	PC:        32
+	instrcuct :00000010000010011000000000100010
+cycle =          27, Start = 1, Stall =           0, Flush =           2
+PC =         32
+mux1 select = 0:         36, mux2 select = 0:         36
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =        108, Adder =        112
+Instruction = 00000010000010011000000000100010
+Add_PC =         32, Adder =         36
 Stage1:
 
-	PC:       104
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001110000
+	PC:        28
+	instrcuct :00000000000000000000000000100000
+	data1_o_1 :00000000000000000000000000100100
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :       108
+	pc_o      :        32
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:       100
+	PC:        24
 	RegDst_o_2:1
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
@@ -2473,13 +2608,18 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :101
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:        96
+	PC:        20
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
-	RegWrite  :1
+	RegWrite  :0
 	ALUOutput :00000000000000000000000000000000
 	Mux7Output:00000000000000000000000000000000
 	RD Addr   :00000
@@ -2492,24 +2632,24 @@ Data Memory:
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        92
+	PC:        16
 	MemtoReg  :0
-	RegWrite  :1
-	RD Addr   :00000
+	RegWrite  :0
+	RD Addr   :01000
 	Lw Data   :00000000000000000000000000000000
-	ALUOutput :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000010
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          2, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -2523,39 +2663,39 @@ cycle =          28
 
 Stage0:
 
-	PC:       112
-	instrcuct :00000000000000000000000000000000
-cycle =          28, Start = 1, Stall =           0, Flush =           1
-PC =        112
-mux1 select = 0:        116, mux2 select = 0:        116
+	PC:        36
+	instrcuct :00000010001100101000100000100000
+cycle =          28, Start = 1, Stall =           0, Flush =           2
+PC =         36
+mux1 select = 0:         40, mux2 select = 0:         40
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =        112, Adder =        116
+Instruction = 00000010001100101000100000100000
+Add_PC =         36, Adder =         40
 Stage1:
 
-	PC:       108
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001110100
+	PC:        32
+	instrcuct :00000010000010011000000000100010
+	data1_o_1 :00000000000000000000000000101000
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :       112
+	pc_o      :        36
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:       104
+	PC:        28
 	RegDst_o_2:1
 	RS Data   :00000000000000000000000000000000
 	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
+	immediate :00000000000000000000000000100000
 	RS Addr   :00000
 	RT Addr   :00000
 	RD Addr   :00000
-	function  :000000
+	function  :100000
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -2563,9 +2703,14 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000000
+	ALU data2 :00000000000000000000000000000000
 Stage3:
 
-	PC:       100
+	PC:        24
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
@@ -2582,24 +2727,24 @@ Data Memory:
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:        96
+	PC:        20
 	MemtoReg  :0
-	RegWrite  :1
+	RegWrite  :0
 	RD Addr   :00000
 	Lw Data   :00000000000000000000000000000000
 	ALUOutput :00000000000000000000000000000000
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          2, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -2613,39 +2758,39 @@ cycle =          29
 
 Stage0:
 
-	PC:       116
-	instrcuct :00000000000000000000000000000000
-cycle =          29, Start = 1, Stall =           0, Flush =           1
-PC =        116
-mux1 select = 0:        120, mux2 select = 0:        120
+	PC:        40
+	instrcuct :00100010010100110000000000000000
+cycle =          29, Start = 1, Stall =           0, Flush =           2
+PC =         40
+mux1 select = 0:         44, mux2 select = 0:         44
 Instruction = | OP || RS|| RT|| RD||   imme  |
-Instruction = 00000000000000000000000000000000
-Add_PC =        116, Adder =        120
+Instruction = 00100010010100110000000000000000
+Add_PC =         40, Adder =         44
 Stage1:
 
-	PC:       112
-	instrcuct :00000000000000000000000000000000
-	data1_o_1 :00000000000000000000000001111000
+	PC:        36
+	instrcuct :00000010001100101000100000100000
+	data1_o_1 :00000000000000000000000000101100
 	Control_in:000000
 	Control_o :00000000000000000000000010000001
 PC:
 
-	pc_o      :       116
+	pc_o      :        40
 	HD_i      :0
 mux3:
 
 	mux3_o    :00000000000000000000000010000001
 Stage2:
 
-	PC:       108
+	PC:        32
 	RegDst_o_2:1
-	RS Data   :00000000000000000000000000000000
-	RT Data   :00000000000000000000000000000000
-	immediate :00000000000000000000000000000000
-	RS Addr   :00000
-	RT Addr   :00000
-	RD Addr   :00000
-	function  :000000
+	RS Data   :00000000000000000000000000000011
+	RT Data   :00000000000000000000000000000001
+	immediate :00000000000000001000000000100010
+	RS Addr   :10000
+	RT Addr   :01001
+	RD Addr   :10000
+	function  :100010
 	memread   :0
 	memread   :0
 Hazard Detection:
@@ -2653,9 +2798,14 @@ Hazard Detection:
 	PC        :0
 	Stage1    :0
 	mux3      :0
+ALU:
+
+	ALUCtrl_o :001
+	ALU data1 :00000000000000000000000000000011
+	ALU data2 :00000000000000000000000000000001
 Stage3:
 
-	PC:       104
+	PC:        28
 	MemWrite  :0
 	Mem Read  :0
 	MemtoReg  :0
@@ -2672,7 +2822,7 @@ Data Memory:
 	read data :00000000000000000000000000000000
 Stage4:
 
-	PC:       100
+	PC:        24
 	MemtoReg  :0
 	RegWrite  :1
 	RD Addr   :00000
@@ -2680,16 +2830,301 @@ Stage4:
 	ALUOutput :00000000000000000000000000000000
 ------
 Registers
-R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
-R2(v0) =          0, R10(t2) =          3, R18(s2) =          0, R26(k0) =          0
-R3(v1) =          0, R11(t3) =          2, R19(s3) =          0, R27(k1) =          0
-R4(a0) =          0, R12(t4) =          3, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          2, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
-R7(a3) =          0, R15(t7) =         20, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
-Data Memory: 0x04 =         10
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
+Data Memory: 0x08 =          0
+Data Memory: 0x0c =          0
+Data Memory: 0x10 =          0
+Data Memory: 0x14 =          0
+Data Memory: 0x18 =          0
+Data Memory: 0x1c =          0
+
+
+=============================================================================================
+cycle =          30
+
+Stage0:
+
+	PC:        44
+	instrcuct :00100010001100100000000000000000
+cycle =          30, Start = 1, Stall =           0, Flush =           2
+PC =         44
+mux1 select = 0:         48, mux2 select = 0:         48
+Instruction = | OP || RS|| RT|| RD||   imme  |
+Instruction = 00100010001100100000000000000000
+Add_PC =         44, Adder =         48
+Stage1:
+
+	PC:        40
+	instrcuct :00100010010100110000000000000000
+	data1_o_1 :00000000000000000000000000110000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
+PC:
+
+	pc_o      :        44
+	HD_i      :0
+mux3:
+
+	mux3_o    :00000000000000000000000001010001
+Stage2:
+
+	PC:        36
+	RegDst_o_2:1
+	RS Data   :00000000000000000000000000000001
+	RT Data   :00000000000000000000000000000010
+	immediate :00000000000000001000100000100000
+	RS Addr   :10001
+	RT Addr   :10010
+	RD Addr   :10001
+	function  :100000
+	memread   :0
+	memread   :0
+Hazard Detection:
+
+	PC        :0
+	Stage1    :0
+	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000001
+	ALU data2 :00000000000000000000000000000010
+Stage3:
+
+	PC:        32
+	MemWrite  :0
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000010
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10000
+Data Memory:
+
+	address   :00000000000000000000000000000010
+	mem write :0
+	mem read  :0
+	write data:00000000000000000000000000000001
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:        28
+	MemtoReg  :0
+	RegWrite  :1
+	RD Addr   :00000
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000000
+------
+Registers
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          2, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
+Data Memory: 0x08 =          0
+Data Memory: 0x0c =          0
+Data Memory: 0x10 =          0
+Data Memory: 0x14 =          0
+Data Memory: 0x18 =          0
+Data Memory: 0x1c =          0
+
+
+=============================================================================================
+cycle =          31
+
+Stage0:
+
+	PC:        48
+	instrcuct :00100010011100010000000000000000
+cycle =          31, Start = 1, Stall =           0, Flush =           2
+PC =         48
+mux1 select = 0:         52, mux2 select = 0:         52
+Instruction = | OP || RS|| RT|| RD||   imme  |
+Instruction = 00100010011100010000000000000000
+Add_PC =         48, Adder =         52
+Stage1:
+
+	PC:        44
+	instrcuct :00100010001100100000000000000000
+	data1_o_1 :00000000000000000000000000110100
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
+PC:
+
+	pc_o      :        48
+	HD_i      :0
+mux3:
+
+	mux3_o    :00000000000000000000000001010001
+Stage2:
+
+	PC:        40
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000010
+	RT Data   :00000000000000000000000000000001
+	immediate :00000000000000000000000000000000
+	RS Addr   :10010
+	RT Addr   :10011
+	RD Addr   :00000
+	function  :000000
+	memread   :0
+	memread   :0
+Hazard Detection:
+
+	PC        :0
+	Stage1    :0
+	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000010
+	ALU data2 :00000000000000000000000000000000
+Stage3:
+
+	PC:        36
+	MemWrite  :0
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000011
+	Mux7Output:00000000000000000000000000000010
+	RD Addr   :10001
+Data Memory:
+
+	address   :00000000000000000000000000000011
+	mem write :0
+	mem read  :0
+	write data:00000000000000000000000000000010
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:        32
+	MemtoReg  :0
+	RegWrite  :1
+	RD Addr   :10000
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000010
+------
+Registers
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          3, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          2, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
+Data Memory: 0x08 =          0
+Data Memory: 0x0c =          0
+Data Memory: 0x10 =          0
+Data Memory: 0x14 =          0
+Data Memory: 0x18 =          0
+Data Memory: 0x1c =          0
+
+
+=============================================================================================
+cycle =          32
+
+Stage0:
+
+	PC:        52
+	instrcuct :00010010000010000000000000000001
+cycle =          32, Start = 1, Stall =           0, Flush =           2
+PC =         52
+mux1 select = 0:         56, mux2 select = 0:         56
+Instruction = | OP || RS|| RT|| RD||   imme  |
+Instruction = 00010010000010000000000000000001
+Add_PC =         52, Adder =         56
+Stage1:
+
+	PC:        48
+	instrcuct :00100010011100010000000000000000
+	data1_o_1 :00000000000000000000000000111000
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
+PC:
+
+	pc_o      :        52
+	HD_i      :0
+mux3:
+
+	mux3_o    :00000000000000000000000001010001
+Stage2:
+
+	PC:        44
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000001
+	RT Data   :00000000000000000000000000000010
+	immediate :00000000000000000000000000000000
+	RS Addr   :10001
+	RT Addr   :10010
+	RD Addr   :00000
+	function  :000000
+	memread   :0
+	memread   :0
+Hazard Detection:
+
+	PC        :0
+	Stage1    :0
+	mux3      :0
+ALU:
+
+	ALUCtrl_o :000
+	ALU data1 :00000000000000000000000000000011
+	ALU data2 :00000000000000000000000000000000
+Stage3:
+
+	PC:        40
+	MemWrite  :0
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000010
+	Mux7Output:00000000000000000000000000000001
+	RD Addr   :10011
+Data Memory:
+
+	address   :00000000000000000000000000000010
+	mem write :0
+	mem read  :0
+	write data:00000000000000000000000000000001
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:        36
+	MemtoReg  :0
+	RegWrite  :1
+	RD Addr   :10001
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000011
+------
+Registers
+R0(r0) =          0, R8 (t0) =          0, R16(s0) =          2, R24(t8) =          0
+R1(at) =          0, R9 (t1) =          1, R17(s1) =          1, R25(t9) =          0
+R2(v0) =          0, R10(t2) =          0, R18(s2) =          2, R26(k0) =          0
+R3(v1) =          0, R11(t3) =          0, R19(s3) =          1, R27(k1) =          0
+R4(a0) =          0, R12(t4) =          0, R20(s4) =          5, R28(gp) =          0
+R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
+R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
+Data Memory: 0x00 =          5
+Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
