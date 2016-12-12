@@ -126,6 +126,13 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\tControl_in:%b",CPU.Control.Op_i);
     $fdisplay(outfile, "\tControl_o :%b",CPU.Control.Control_o);
 
+    $fdisplay(outfile, "PC:\n");
+    $fdisplay(outfile, "\tpc_o      :%d",CPU.PC.pc_o);
+    $fdisplay(outfile, "\tHD_i      :%b",CPU.PC.HD_i);
+
+    $fdisplay(outfile, "mux3:\n");
+    $fdisplay(outfile, "\tmux3_o    :%b",CPU.mux3_o);
+
     $fdisplay(outfile, "Stage2:\n");
     $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o-8);
     $fdisplay(outfile, "\tRegDst_o_2:%b",CPU.Stage2.RegDst_o_2);
@@ -136,6 +143,13 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\tRT Addr   :%b",CPU.Stage2.RTaddr_o);
     $fdisplay(outfile, "\tRD Addr   :%b",CPU.Stage2.RDaddr_o);
     $fdisplay(outfile, "\tfunction  :%b",CPU.Stage2.funct_o);
+    $fdisplay(outfile, "\tmemread   :%b",CPU.Stage2.Memory_read_i_2);  
+    $fdisplay(outfile, "\tmemread   :%b",CPU.Stage2.Memory_read_o_2);  
+
+    $fdisplay(outfile, "Hazard Detection:\n");
+    $fdisplay(outfile, "\tPC        :%b",CPU.HD_Unit.HD_o_PC);
+    $fdisplay(outfile, "\tStage1    :%b",CPU.HD_Unit.HD_o_Stage1);
+    $fdisplay(outfile, "\tmux3      :%b",CPU.HD_Unit.HD_o_mux3);
 
     $fdisplay(outfile, "Stage3:\n");
     $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o-12);
@@ -161,8 +175,7 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\tRD Addr   :%b",CPU.Stage4.RDaddr_o);
     $fdisplay(outfile, "\tLw Data   :%b",CPU.Stage4.Data1_o);
     $fdisplay(outfile, "\tALUOutput :%b",CPU.Stage4.Data2_o);
-
-	$fdisplay(outfile, "------");
+	 $fdisplay(outfile, "------");
 	
     // print Registers
     $fdisplay(outfile, "Registers");
