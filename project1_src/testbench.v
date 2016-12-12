@@ -101,10 +101,15 @@ always@(posedge Clk) begin
     // put in your own signal to count stall and flush
     // if(CPU.HazzardDetection.mux8_o == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Branch_o == 0)stall = stall + 1;
     // if(CPU.HazzardDetection.Flush_o == 1)flush = flush + 1;  
+    if(CPU.HD_Unit.HD_o_Stage1 == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Control_o == 0) 
+       stall = stall + 1;
+    if(CPU.Stage1.flush_i == 1)
+       flush = flush + 1;
 
     //debug messages
     $fdisplay(outfile, "stage2 alu op:%b", CPU.Stage2.ALUOp_i_2); 
     $fdisplay(outfile, "stage2_rsdata_i:%d, stage2_rsdata_o:%d", CPU.Stage2.RSdata_i, CPU.Stage2.RSdata_o);
+    $fdisplay(outfile, "stage2 alu op:%b, alu src:%b", CPU.Stage2.ALUOp_o_2, CPU.Stage2.ALUSrc_o_2);
     $fdisplay(outfile, "alu ctrl funct:%b, alu op:%b, alu ctrl:%b", CPU.ALU_Control.funct_i, CPU.ALU_Control.ALUOp_i, CPU.ALU_Control.ALUCtrl_o); 
     $fdisplay(outfile, "alu data1:%b, alu data2:%b", CPU.ALU.data1_i, CPU.ALU.data2_i);
     $fdisplay(outfile, "alu: %d", CPU.ALU_o);   
@@ -142,11 +147,7 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\n");
     
     counter = counter + 1;
-    if(CPU.HD_Unit.HD_o_Stage1 == 1 && CPU.Control.Jump_o == 0 && CPU.Control.Control_o == 0) 
-       stall = stall + 1;
-    if(CPU.Stage1.flush_i == 1)
-       flush = flush + 1;
-      
+          
 end
 
   

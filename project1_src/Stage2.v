@@ -51,7 +51,7 @@ output [5:0]  funct_o;
 reg    [5:0]  funct_o;
 
 
-always @(posedge clk_i)begin
+always @(posedge clk_i ,negedge clk_i)begin
 	RegWrite_o_2 <= RegWrite_i_2;
 	MemtoReg_o_2 <= MemtoReg_i_2;	
 	Memory_write_o_2 <= Memory_write_i_2;
