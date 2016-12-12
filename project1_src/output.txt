@@ -1,18 +1,60 @@
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:00, alu src:0
-alu ctrl funct:100000, alu op:00, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000000
-alu:          0
-sign extended:00000000000000000100000000100000
-mux4 data1:00000000000000000000000000000000, data2:00000000000000000100000000100000
-data memory addr: 00000000000000000000000000000000
+=============================================================================================
+cycle =           0
+
+Stage0:
+
+	PC:         0
+	instrcuct :00000000000000000100000000100000
 cycle =           0, Start = 1, Stall =           0, Flush =           0
 PC =          0
 mux1 select = 0:          4, mux2 select = 0:          4
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000100000000100000
 Add_PC =          0, Adder =          4
+Stage1:
+
+	PC:4294967292
+	instrcuct :00000000000000000100000000100000
+	data1_o_1 :00000000000000000000000000000100
+	Control_in:000000
+	Control_o :00000000000000000000000010000001
+Stage2:
+
+	PC:4294967288
+	RegDst_o_2:1
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000100000000100000
+	RS Addr   :00000
+	RT Addr   :00000
+	RD Addr   :01000
+	function  :100000
+Stage3:
+
+	PC:4294967284
+	MemWrite  :0
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :0
+	ALUOutput :xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :00000
+Data Memory:
+
+	address   :xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	mem write :0
+	mem read  :0
+	write data:00000000000000000000000000000000
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:4294967280
+	MemtoReg  :0
+	RegWrite  :0
+	RD Addr   :00000
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000000
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
 R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
@@ -32,21 +74,63 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:00, alu src:0
-alu ctrl funct:100000, alu op:00, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000000
-alu:          0
-sign extended:00000000000000000100000000100000
-mux4 data1:00000000000000000000000000000000, data2:00000000000000000100000000100000
-data memory addr: 00000000000000000000000000000000
+=============================================================================================
+cycle =           1
+
+Stage0:
+
+	PC:         4
+	instrcuct :00100000000010010000000000001010
 cycle =           1, Start = 1, Stall =           0, Flush =           0
 PC =          4
 mux1 select = 0:          8, mux2 select = 0:          8
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00100000000010010000000000001010
 Add_PC =          4, Adder =          8
+Stage1:
+
+	PC:         0
+	instrcuct :00000000000000000100000000100000
+	data1_o_1 :00000000000000000000000000001000
+	Control_in:000000
+	Control_o :00000000000000000000000010000001
+Stage2:
+
+	PC:4294967292
+	RegDst_o_2:1
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000100000000100000
+	RS Addr   :00000
+	RT Addr   :00000
+	RD Addr   :01000
+	function  :100000
+Stage3:
+
+	PC:4294967288
+	MemWrite  :0
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000000
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :01000
+Data Memory:
+
+	address   :00000000000000000000000000000000
+	mem write :0
+	mem read  :0
+	write data:00000000000000000000000000000000
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:4294967284
+	MemtoReg  :0
+	RegWrite  :0
+	RD Addr   :00000
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
 R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
@@ -66,21 +150,63 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:01
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:001010, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000001010
-alu:         10
-sign extended:00000000000000000000000000001010
-mux4 data1:00000000000000000000000000000000, data2:00000000000000000000000000001010
-data memory addr: 00000000000000000000000000001010
+=============================================================================================
+cycle =           2
+
+Stage0:
+
+	PC:         8
+	instrcuct :10101101000000000000000000000000
 cycle =           2, Start = 1, Stall =           0, Flush =           0
 PC =          8
 mux1 select = 0:         12, mux2 select = 0:         12
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 10101101000000000000000000000000
 Add_PC =          8, Adder =         12
+Stage1:
+
+	PC:         4
+	instrcuct :00100000000010010000000000001010
+	data1_o_1 :00000000000000000000000000001100
+	Control_in:001000
+	Control_o :00000000000000000000000001010001
+Stage2:
+
+	PC:         0
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000001010
+	RS Addr   :00000
+	RT Addr   :01001
+	RD Addr   :00000
+	function  :001010
+Stage3:
+
+	PC:4294967292
+	MemWrite  :0
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000000
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :01000
+Data Memory:
+
+	address   :00000000000000000000000000000000
+	mem write :0
+	mem read  :0
+	write data:00000000000000000000000000000000
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:4294967288
+	MemtoReg  :0
+	RegWrite  :1
+	RD Addr   :01000
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000000
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
 R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
@@ -100,21 +226,63 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:01
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000000, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000000
-alu:          0
-sign extended:00000000000000000000000000000000
-mux4 data1:00000000000000000000000000000000, data2:00000000000000000000000000000000
-data memory addr: 00000000000000000000000000001010
+=============================================================================================
+cycle =           3
+
+Stage0:
+
+	PC:        12
+	instrcuct :10101101000010010000000000000100
 cycle =           3, Start = 1, Stall =           0, Flush =           0
 PC =         12
 mux1 select = 0:         16, mux2 select = 0:         16
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 10101101000010010000000000000100
 Add_PC =         12, Adder =         16
+Stage1:
+
+	PC:         8
+	instrcuct :10101101000000000000000000000000
+	data1_o_1 :00000000000000000000000000010000
+	Control_in:101011
+	Control_o :00000000000000000000000001011000
+Stage2:
+
+	PC:         4
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000000
+	RS Addr   :01000
+	RT Addr   :00000
+	RD Addr   :00000
+	function  :000000
+Stage3:
+
+	PC:         0
+	MemWrite  :0
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000001010
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :01001
+Data Memory:
+
+	address   :00000000000000000000000000001010
+	mem write :0
+	mem read  :0
+	write data:00000000000000000000000000000000
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:4294967292
+	MemtoReg  :0
+	RegWrite  :1
+	RD Addr   :01000
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000000
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
 R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
@@ -134,21 +302,63 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:01
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000000, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =           4
+
+Stage0:
+
+	PC:        16
+	instrcuct :10001101000011010000000000000100
 cycle =           4, Start = 1, Stall =           0, Flush =           0
 PC =         16
 mux1 select = 0:         20, mux2 select = 0:         20
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 10001101000011010000000000000100
 Add_PC =         16, Adder =         20
+Stage1:
+
+	PC:        12
+	instrcuct :10101101000010010000000000000100
+	data1_o_1 :00000000000000000000000000010100
+	Control_in:101011
+	Control_o :00000000000000000000000001011000
+Stage2:
+
+	PC:         8
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01001
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:         4
+	MemWrite  :1
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :0
+	ALUOutput :00000000000000000000000000000000
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :00000
+Data Memory:
+
+	address   :00000000000000000000000000000000
+	mem write :1
+	mem read  :0
+	write data:00000000000000000000000000000000
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:         0
+	MemtoReg  :0
+	RegWrite  :1
+	RD Addr   :01001
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000001010
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
 R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
@@ -158,7 +368,7 @@ R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =      
 R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
-Data Memory: 0x00 =          0
+Data Memory: 0x00 =          5
 Data Memory: 0x04 =          0
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
@@ -168,24 +378,66 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000000, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =           5
+
+Stage0:
+
+	PC:        20
+	instrcuct :00000001101010010111100000100000
 cycle =           5, Start = 1, Stall =           0, Flush =           0
 PC =         20
 mux1 select = 0:         24, mux2 select = 0:         24
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000001101010010111100000100000
 Add_PC =         20, Adder =         24
+Stage1:
+
+	PC:        16
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000011000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        12
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:         8
+	MemWrite  :1
+	Mem Read  :0
+	MemtoReg  :0
+	RegWrite  :0
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000001010
+	RD Addr   :01001
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :1
+	mem read  :0
+	write data:00000000000000000000000000001010
+	read data :00000000000000000000000000000000
+Stage4:
+
+	PC:         4
+	MemtoReg  :0
+	RegWrite  :0
+	RD Addr   :00000
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000000
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
@@ -202,24 +454,66 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =           6
+
+Stage0:
+
+	PC:        24
+	instrcuct :00100000000010100000000000001101
 cycle =           6, Start = 1, Stall =           0, Flush =           0
 PC =         24
 mux1 select = 0:         28, mux2 select = 0:         28
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00100000000010100000000000001101
 Add_PC =         24, Adder =         28
+Stage1:
+
+	PC:        20
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000011100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        16
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        12
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000000
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:         8
+	MemtoReg  :0
+	RegWrite  :0
+	RD Addr   :01001
+	Lw Data   :00000000000000000000000000000000
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
@@ -227,7 +521,7 @@ R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =      
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -236,24 +530,66 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =           7
+
+Stage0:
+
+	PC:        28
+	instrcuct :00000001001010010101100000011000
 cycle =           7, Start = 1, Stall =           0, Flush =           0
 PC =         28
 mux1 select = 0:         32, mux2 select = 0:         32
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000001001010010101100000011000
 Add_PC =         28, Adder =         32
+Stage1:
+
+	PC:        24
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000100000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        20
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000000000
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        16
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000000
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000000
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        12
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
@@ -261,7 +597,7 @@ R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =      
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -270,32 +606,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =           8
+
+Stage0:
+
+	PC:        32
+	instrcuct :00001000000000000000000000001011
 cycle =           8, Start = 1, Stall =           0, Flush =           0
 PC =         32
 mux1 select = 0:         36, mux2 select = 0:         36
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00001000000000000000000000001011
 Add_PC =         32, Adder =         36
+Stage1:
+
+	PC:        28
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000100100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        24
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        20
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        16
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -304,32 +682,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =           9
+
+Stage0:
+
+	PC:        36
+	instrcuct :00100001001010010000000000000001
 cycle =           9, Start = 1, Stall =           0, Flush =           0
 PC =         36
 mux1 select = 0:         40, mux2 select = 0:         40
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00100001001010010000000000000001
 Add_PC =         36, Adder =         40
+Stage1:
+
+	PC:        32
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000101000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        28
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        24
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        20
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -338,32 +758,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          10
+
+Stage0:
+
+	PC:        40
+	instrcuct :00100001001010010000000000000001
 cycle =          10, Start = 1, Stall =           0, Flush =           0
 PC =         40
 mux1 select = 0:         44, mux2 select = 0:         44
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00100001001010010000000000000001
 Add_PC =         40, Adder =         44
+Stage1:
+
+	PC:        36
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000101100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        32
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        28
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        24
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -372,32 +834,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          11
+
+Stage0:
+
+	PC:        44
+	instrcuct :00000001010010010101000000100010
 cycle =          11, Start = 1, Stall =           0, Flush =           0
 PC =         44
 mux1 select = 0:         48, mux2 select = 0:         48
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000001010010010101000000100010
 Add_PC =         44, Adder =         48
+Stage1:
+
+	PC:        40
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000110000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        36
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        32
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        28
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -406,32 +910,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          12
+
+Stage0:
+
+	PC:        48
+	instrcuct :00000001001010100101100000100100
 cycle =          12, Start = 1, Stall =           0, Flush =           0
 PC =         48
 mux1 select = 0:         52, mux2 select = 0:         52
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000001001010100101100000100100
 Add_PC =         48, Adder =         52
+Stage1:
+
+	PC:        44
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000110100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        40
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        36
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        32
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -440,32 +986,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          13
+
+Stage0:
+
+	PC:        52
+	instrcuct :00000001010010110110000000100101
 cycle =          13, Start = 1, Stall =           0, Flush =           0
 PC =         52
 mux1 select = 0:         56, mux2 select = 0:         56
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000001010010110110000000100101
 Add_PC =         52, Adder =         56
+Stage1:
+
+	PC:        48
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000111000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        44
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        40
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        36
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -474,32 +1062,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          14
+
+Stage0:
+
+	PC:        56
+	instrcuct :00000000000000000000000000000000
 cycle =          14, Start = 1, Stall =           0, Flush =           0
 PC =         56
 mux1 select = 0:         60, mux2 select = 0:         60
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         56, Adder =         60
+Stage1:
+
+	PC:        52
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000000111100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        48
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        44
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        40
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -508,32 +1138,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          15
+
+Stage0:
+
+	PC:        60
+	instrcuct :00000000000000000000000000000000
 cycle =          15, Start = 1, Stall =           0, Flush =           0
 PC =         60
 mux1 select = 0:         64, mux2 select = 0:         64
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         60, Adder =         64
+Stage1:
+
+	PC:        56
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001000000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        52
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        48
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        44
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -542,32 +1214,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          16
+
+Stage0:
+
+	PC:        64
+	instrcuct :00000000000000000000000000000000
 cycle =          16, Start = 1, Stall =           0, Flush =           0
 PC =         64
 mux1 select = 0:         68, mux2 select = 0:         68
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         64, Adder =         68
+Stage1:
+
+	PC:        60
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001000100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        56
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        52
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        48
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -576,32 +1290,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          17
+
+Stage0:
+
+	PC:        68
+	instrcuct :00000000000000000000000000000000
 cycle =          17, Start = 1, Stall =           0, Flush =           0
 PC =         68
 mux1 select = 0:         72, mux2 select = 0:         72
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         68, Adder =         72
+Stage1:
+
+	PC:        64
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001001000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        60
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        56
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        52
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -610,32 +1366,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          18
+
+Stage0:
+
+	PC:        72
+	instrcuct :00000000000000000000000000000000
 cycle =          18, Start = 1, Stall =           0, Flush =           0
 PC =         72
 mux1 select = 0:         76, mux2 select = 0:         76
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         72, Adder =         76
+Stage1:
+
+	PC:        68
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001001100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        64
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        60
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        56
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -644,32 +1442,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          19
+
+Stage0:
+
+	PC:        76
+	instrcuct :00000000000000000000000000000000
 cycle =          19, Start = 1, Stall =           0, Flush =           0
 PC =         76
 mux1 select = 0:         80, mux2 select = 0:         80
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         76, Adder =         80
+Stage1:
+
+	PC:        72
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001010000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        68
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        64
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        60
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -678,32 +1518,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          20
+
+Stage0:
+
+	PC:        80
+	instrcuct :00000000000000000000000000000000
 cycle =          20, Start = 1, Stall =           0, Flush =           0
 PC =         80
 mux1 select = 0:         84, mux2 select = 0:         84
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         80, Adder =         84
+Stage1:
+
+	PC:        76
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001010100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        72
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        68
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        64
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -712,32 +1594,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          21
+
+Stage0:
+
+	PC:        84
+	instrcuct :00000000000000000000000000000000
 cycle =          21, Start = 1, Stall =           0, Flush =           0
 PC =         84
 mux1 select = 0:         88, mux2 select = 0:         88
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         84, Adder =         88
+Stage1:
+
+	PC:        80
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001011000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        76
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        72
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        68
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -746,32 +1670,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          22
+
+Stage0:
+
+	PC:        88
+	instrcuct :00000000000000000000000000000000
 cycle =          22, Start = 1, Stall =           0, Flush =           0
 PC =         88
 mux1 select = 0:         92, mux2 select = 0:         92
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         88, Adder =         92
+Stage1:
+
+	PC:        84
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001011100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        80
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        76
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        72
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -780,32 +1746,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          23
+
+Stage0:
+
+	PC:        92
+	instrcuct :00000000000000000000000000000000
 cycle =          23, Start = 1, Stall =           0, Flush =           0
 PC =         92
 mux1 select = 0:         96, mux2 select = 0:         96
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         92, Adder =         96
+Stage1:
+
+	PC:        88
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001100000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        84
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        80
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        76
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -814,32 +1822,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          24
+
+Stage0:
+
+	PC:        96
+	instrcuct :00000000000000000000000000000000
 cycle =          24, Start = 1, Stall =           0, Flush =           0
 PC =         96
 mux1 select = 0:        100, mux2 select = 0:        100
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =         96, Adder =        100
+Stage1:
+
+	PC:        92
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001100100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        88
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        84
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        80
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -848,32 +1898,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          25
+
+Stage0:
+
+	PC:       100
+	instrcuct :00000000000000000000000000000000
 cycle =          25, Start = 1, Stall =           0, Flush =           0
 PC =        100
 mux1 select = 0:        104, mux2 select = 0:        104
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =        100, Adder =        104
+Stage1:
+
+	PC:        96
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001101000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        92
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        88
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        84
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -882,32 +1974,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          26
+
+Stage0:
+
+	PC:       104
+	instrcuct :00000000000000000000000000000000
 cycle =          26, Start = 1, Stall =           0, Flush =           0
 PC =        104
 mux1 select = 0:        108, mux2 select = 0:        108
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =        104, Adder =        108
+Stage1:
+
+	PC:       100
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001101100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:        96
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        92
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        88
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -916,32 +2050,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          27
+
+Stage0:
+
+	PC:       108
+	instrcuct :00000000000000000000000000000000
 cycle =          27, Start = 1, Stall =           0, Flush =           0
 PC =        108
 mux1 select = 0:        112, mux2 select = 0:        112
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =        108, Adder =        112
+Stage1:
+
+	PC:       104
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001110000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:       100
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:        96
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        92
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -950,32 +2126,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          28
+
+Stage0:
+
+	PC:       112
+	instrcuct :00000000000000000000000000000000
 cycle =          28, Start = 1, Stall =           0, Flush =           0
 PC =        112
 mux1 select = 0:        116, mux2 select = 0:        116
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =        112, Adder =        116
+Stage1:
+
+	PC:       108
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001110100
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:       104
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:       100
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:        96
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0
@@ -984,32 +2202,74 @@ Data Memory: 0x18 =          0
 Data Memory: 0x1c =          0
 
 
-stage2 alu op:00
-stage2_rsdata_i:         0, stage2_rsdata_o:         0
-stage2 alu op:01, alu src:1
-alu ctrl funct:000100, alu op:01, alu ctrl:000
-alu data1:00000000000000000000000000000000, alu data2:00000000000000000000000000000100
-alu:          4
-sign extended:00000000000000000000000000000100
-mux4 data1:00000000000000000000000000000100, data2:00000000000000000000000000000100
-data memory addr: 00000000000000000000000000000100
+=============================================================================================
+cycle =          29
+
+Stage0:
+
+	PC:       116
+	instrcuct :00000000000000000000000000000000
 cycle =          29, Start = 1, Stall =           0, Flush =           0
 PC =        116
 mux1 select = 0:        120, mux2 select = 0:        120
 Instruction = | OP || RS|| RT|| RD||   imme  |
 Instruction = 00000000000000000000000000000000
 Add_PC =        116, Adder =        120
+Stage1:
+
+	PC:       112
+	instrcuct :10001101000011010000000000000100
+	data1_o_1 :00000000000000000000000001111000
+	Control_in:100011
+	Control_o :00000000000000000000000001010111
+Stage2:
+
+	PC:       108
+	RegDst_o_2:0
+	RS Data   :00000000000000000000000000000000
+	RT Data   :00000000000000000000000000001010
+	immediate :00000000000000000000000000000100
+	RS Addr   :01000
+	RT Addr   :01101
+	RD Addr   :00000
+	function  :000100
+Stage3:
+
+	PC:       104
+	MemWrite  :0
+	Mem Read  :1
+	MemtoReg  :1
+	RegWrite  :1
+	ALUOutput :00000000000000000000000000000100
+	Mux7Output:00000000000000000000000000000100
+	RD Addr   :01101
+Data Memory:
+
+	address   :00000000000000000000000000000100
+	mem write :0
+	mem read  :1
+	write data:00000000000000000000000000000100
+	read data :00000000000000000000000000001010
+Stage4:
+
+	PC:       100
+	MemtoReg  :1
+	RegWrite  :1
+	RD Addr   :01101
+	Lw Data   :00000000000000000000000000001010
+	ALUOutput :00000000000000000000000000000100
+------
 Registers
 R0(r0) =          0, R8 (t0) =          0, R16(s0) =          0, R24(t8) =          0
-R1(at) =          0, R9 (t1) =          0, R17(s1) =          0, R25(t9) =          0
+R1(at) =          0, R9 (t1) =         10, R17(s1) =          0, R25(t9) =          0
 R2(v0) =          0, R10(t2) =          0, R18(s2) =          0, R26(k0) =          0
 R3(v1) =          0, R11(t3) =          0, R19(s3) =          0, R27(k1) =          0
 R4(a0) =          0, R12(t4) =          0, R20(s4) =          0, R28(gp) =          0
-R5(a1) =          0, R13(t5) =          0, R21(s5) =          0, R29(sp) =          0
+R5(a1) =          0, R13(t5) =         10, R21(s5) =          0, R29(sp) =          0
 R6(a2) =          0, R14(t6) =          0, R22(s6) =          0, R30(s8) =          0
 R7(a3) =          0, R15(t7) =          0, R23(s7) =          0, R31(ra) =          0
 Data Memory: 0x00 =          0
-Data Memory: 0x04 =          0
+Data Memory: 0x04 =         10
 Data Memory: 0x08 =          0
 Data Memory: 0x0c =          0
 Data Memory: 0x10 =          0

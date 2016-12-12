@@ -146,6 +146,13 @@ always@(posedge Clk) begin
     $fdisplay(outfile, "\tALUOutput :%b",CPU.Stage3.Data1_o);
     $fdisplay(outfile, "\tMux7Output:%b",CPU.Stage3.mux7_output_data_o);
     $fdisplay(outfile, "\tRD Addr   :%b",CPU.Stage3.RDaddr_o);
+    
+    $fdisplay(outfile, "Data Memory:\n");
+    $fdisplay(outfile, "\taddress   :%b",CPU.Data_Memory.address_i);
+    $fdisplay(outfile, "\tmem write :%b",CPU.Data_Memory.Memory_write_i);
+    $fdisplay(outfile, "\tmem read  :%b",CPU.Data_Memory.Memory_read_i);
+    $fdisplay(outfile, "\twrite data:%b",CPU.Data_Memory.write_data_i);
+    $fdisplay(outfile, "\tread data :%b",CPU.Data_Memory.read_data_o);
 
     $fdisplay(outfile, "Stage4:\n");
     $fdisplay(outfile, "\tPC:%d",CPU.PC.pc_o-16);
