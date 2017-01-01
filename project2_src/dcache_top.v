@@ -118,11 +118,14 @@ assign	write_hit    = hit & p1_MemWrite_i;
 assign	cache_dirty  = write_hit;
 
 // tag comparator
-//!!! add you code here!  (hit=...?,  r_hit_data=...?)
+//!!! add you code here!
+assign r_hit_data = sram_cache_data;
+assign hit = (p1_tag == sram_tag && sram_valid == 1)? 1:0;
 	
 // read data :  256-bit to 32-bit
 always@(p1_offset or r_hit_data) begin
 	//!!! add you code here! (p1_data=...?)
+	p1_data = hit?  
 end
 
 

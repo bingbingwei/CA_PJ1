@@ -1,12 +1,30 @@
 module CPU
 (
     clk_i, 
-    start_i
+	rst_i,
+    start_i,
+	
+	mem_data_i, 
+	mem_ack_i, 	
+	mem_data_o, 
+	mem_addr_o, 	
+	mem_enable_o, 
+	mem_write_o
 );
 
 // Ports
 input               clk_i;
 input               start_i;
+input               rst_i;
+//
+// to Data Memory interface		
+//
+input	[255:0]	mem_data_i; 
+input			mem_ack_i; 	
+output	[255:0]	mem_data_o; 
+output	[31:0]	mem_addr_o; 	
+output			mem_enable_o; 
+output			mem_write_o; 
 
 wire  [31:0]   inst, inst_addr, instReadData;
 wire  [31:0]   controlSignal_o;
@@ -60,9 +78,11 @@ Adder Add_PC(
     .data_o     (Add_PC_o)
 );
 
+//////PC要再加東西
 PC PC(
     .clk_i      (clk_i),
     .start_i    (start_i),
+	.rst_i		(rst_i),
     .HD_i       (HD_o_PC),
     .pc_i       (PC_i),
     .pc_o       (inst_addr)
@@ -76,7 +96,6 @@ Instruction_Memory Instruction_Memory(
 MUX32 mux1(
     .data1_i    (Add_PC_o), //0
     .data2_i    (Adder_o), //1
-    //注意可能會錯
     .select_i   (branch_o && equal_o),
     .data_o     (mux1_o)
 );
@@ -137,14 +156,14 @@ ALU_Control ALU_Control(
     .ALUCtrl_o  (ALUCtrl_o)
 );
 
-Data_Memory Data_Memory(
+/*Data_Memory Data_Memory(
     .clk_i          (clk_i),
     .address_i      (Stage3_addr_o),
     .Memory_write_i (Stage3_MemWrite_o),
     .Memory_read_i  (Stage3_MemRead_o),
     .write_data_i   (Stage3_WriteData_o),
     .read_data_o    (Data_Memory_o)
-);
+);*/
 
 MUX32 mux5(
     .data1_i(Stage4_Data2_o),//0, Stage4.Data2_o
@@ -275,7 +294,6 @@ MUX32 mux3(
                             //7:RegDst_i [31:8]:0
 );
 
-
 Stage1 Stage1(
 	.inst_i(instReadData),
 	.inst_o(inst),
@@ -321,5 +339,31 @@ MUX32 mux10(
    .data_o(mux10_o)
 
 );
+
+
+//data cache
+dcache_top dcache
+(
+    // System clock, reset and stall
+	.clk_i(clk_i), 
+	.rst_i(rst_i),
+	
+	// to Data Memory interface		
+	.mem_data_i(mem_data_i), 
+	.mem_ack_i(mem_ack_i), 	
+	.mem_data_o(mem_data_o), 
+	.mem_addr_o(mem_addr_o), 	
+	.mem_enable_o(mem_enable_o), 
+	.mem_write_o(mem_write_o), 
+	
+	// to CPU interface	
+	.p1_data_i(Stage3_WriteData_o), 
+	.p1_addr_i(Stage3_addr_o), 	
+	.p1_MemRead_i(Stage3_MemRead_o), 
+	.p1_MemWrite_i(Stage3_MemWrite_o), 
+	.p1_data_o(), 
+	.p1_stall_o()
+);
+
 
 endmodule
