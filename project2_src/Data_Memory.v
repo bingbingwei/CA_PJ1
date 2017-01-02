@@ -1,43 +1,102 @@
 module Data_Memory
 (
-   clk_i,
-	address_i,
-	Memory_write_i,
-	Memory_read_i,
-	write_data_i,
-	read_data_o
+	clk_i,
+	rst_i,
+	addr_i,
+	data_i,
+	enable_i,
+	write_i,
+	ack_o,
+	data_o
 );
 
-input             clk_i;
-input	   [31:0]	address_i;
-input	            Memory_write_i;
-input	            Memory_read_i;
-input	   [31:0]	write_data_i;
-output	[31:0]	read_data_o;
+// Interface
+input				    clk_i;
+input				    rst_i;
+input	[31:0]		addr_i;
+input	[255:0]		data_i;
+input				    enable_i;
+input				    write_i;
+output				  ack_o;
+output	[255:0] data_o;
 
-reg		[7:0]	memory	[0:31];
-//reg      [31:0]   read_data_o;
 
-assign read_data_o = (Memory_read_i) ? {memory[address_i+3], memory[address_i+2], memory[address_i+1], memory[address_i]} : 32'b0;
+// Memory
+reg		[255:0]		memory 			[0:511];	//16KB
+reg		[3:0]		  count;
+reg					    ack;
+reg					    ok;
+reg		[255:0]		data;
+wire	[26:0]		addr;
 
-always@(posedge clk_i) begin
-   if(Memory_write_i) begin
-      memory[address_i] <= write_data_i[7:0]; 
-      memory[address_i+1] <= write_data_i[15:8];
-      memory[address_i+2] <= write_data_i[23:16];
-      memory[address_i+3] <= write_data_i[31:24];
-   end
+parameter STATE_IDLE			= 3'h0,
+					STATE_WAIT			= 3'h1,
+					STATE_ACK			  = 3'h2,					
+					STATE_FINISH		= 3'h3;
+
+reg		[1:0]		state;
+
+assign	ack_o = ack;
+assign	addr = addr_i>>5;
+assign	data_o = data;
+
+//Controller 
+always@(posedge clk_i or negedge rst_i) begin
+	if(~rst_i) begin
+		count <= 4'b0;
+		ok <= 1'b0;
+		ack <= 1'b0;
+		state <= STATE_IDLE;
+	end
+    else begin
+		case(state) 
+			STATE_IDLE: begin
+				if(enable_i) begin
+					count <= count + 1;
+					state <= STATE_WAIT;
+				end
+				else begin
+					state <= STATE_IDLE;
+				end
+			end
+			STATE_WAIT: begin
+				if(count == 4'd6) begin	
+					ok <= 1'b1;
+					state <= STATE_ACK;
+				end
+				else begin
+					count <= count + 1;
+					state <= STATE_WAIT;
+				end
+			end
+			STATE_ACK: begin
+				count <= 4'b0;
+				ok <= 1'b0;
+				ack <= 1'b1;
+				state <= STATE_FINISH;
+			end
+			STATE_FINISH: begin
+				ack <= 1'b0;
+				state <= STATE_IDLE;
+			end
+		endcase	
+	end
 end
 
-/*always@(address_i, Memory_write_i, Memory_read_i, write_data_i) begin
-   if(Memory_write_i == 1'b1) 
-      memory[address_i] <= write_data_i;
-   if(Memory_read_i == 1'b1)
-      read_data_o <= memory[address_i];
-   else
-      read_data_o <= 32'd0;
+// Read Data       
+always@(posedge clk_i) begin
+    if(ok && !write_i) begin
+		data = memory[addr];
+	end
+end
 
-end   */
+// Write Data      
+always@(posedge clk_i) begin
+    if(ok && write_i) begin
+		memory[addr] <= data_i;
+	end
+end
 
-	
+
+
 endmodule

@@ -64,6 +64,8 @@ wire  [31:0]   Data_Memory_o;
 wire  [1:0]    Forwarding_Unit_mux6_o, Forwarding_Unit_mux7_o;
 wire          Forwarding_Unit_mux9_o, Forwarding_Unit_mux10_o;
 
+wire           cache_stall;
+
 Control Control(
     .Op_i           (inst[31:26]),
     .Control_o      (controlSignal_o),
@@ -81,9 +83,10 @@ Adder Add_PC(
 //////PC要再加東西
 PC PC(
     .clk_i      (clk_i),
+	 .rst_i		 (rst_i),
     .start_i    (start_i),
-	.rst_i		(rst_i),
-    .HD_i       (HD_o_PC),
+    .stall_i    (cache_stall),
+    .pcEnable_i (~HD_o_PC),
     .pc_i       (PC_i),
     .pc_o       (inst_addr)
 );
@@ -218,7 +221,8 @@ Stage4 Stage4(
     .Data2_i(Stage3_addr_o),//four line -> use wire
 	.Data2_o(Stage4_Data2_o),
     .RDaddr_i(Stage3_RDaddr_o),//three line -> use wire
-    .RDaddr_o(Stage4_RDaddr_o)//three line -> use wire***
+    .RDaddr_o(Stage4_RDaddr_o),//three line -> use wire***
+    .stall_i(cache_stall)
 );
 
 Stage3 Stage3(
@@ -240,7 +244,8 @@ Stage3 Stage3(
     .mux7_output_data_i(mux7_o),//three line -> use wire
     .mux7_output_data_o(Stage3_WriteData_o),
 	 .RDaddr_i(mux8_o),
-    .RDaddr_o(Stage3_RDaddr_o)//three line -> use wire
+    .RDaddr_o(Stage3_RDaddr_o),//three line -> use wire
+    .stall_i(cache_stall)
 );
 
 Stage2 Stage2(
@@ -282,7 +287,8 @@ Stage2 Stage2(
 
     //different from original
     .funct_i(inst[5:0]),
-    .funct_o(Stage2_funct_o)
+    .funct_o(Stage2_funct_o),
+    .stall_i(cache_stall)
 );
 
 MUX32 mux3(
@@ -298,6 +304,7 @@ Stage1 Stage1(
 	.inst_i(instReadData),
 	.inst_o(inst),
     .HD_i(HD_o_Stage1),
+    .stall_i(cache_stall),
     .flush_i(jump_o || (branch_o && equal_o)),
     .data1_i(Add_PC_o),
     .data1_o_1(Stage1_PC_o),
@@ -361,8 +368,8 @@ dcache_top dcache
 	.p1_addr_i(Stage3_addr_o), 	
 	.p1_MemRead_i(Stage3_MemRead_o), 
 	.p1_MemWrite_i(Stage3_MemWrite_o), 
-	.p1_data_o(), 
-	.p1_stall_o()
+	.p1_data_o(Data_Memory_o), 
+	.p1_stall_o(cache_stall)
 );
 
 

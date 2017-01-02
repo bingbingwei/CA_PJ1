@@ -16,7 +16,8 @@ module Stage3(
     mux7_output_data_i,
     mux7_output_data_o,
 	RDaddr_i,
-    RDaddr_o
+    RDaddr_o,
+    stall_i
 );
 
 input	      RegWrite_i_3,MemtoReg_i_3,Memory_write_i_3,Memory_read_i_3,clk_i;
@@ -30,14 +31,27 @@ reg	       RegWrite_o_3, MemtoReg_o_3, Memory_write_o_3, Memory_read_o_3;
 reg [31:0] Data1_o, mux7_output_data_o;
 reg [4:0]  RDaddr_o;
 
+input       stall_i;
+
 always @(posedge clk_i) begin
-	RegWrite_o_3 <= RegWrite_i_3;
-	MemtoReg_o_3 <= MemtoReg_i_3;	
-	Memory_write_o_3 <= Memory_write_i_3;
-	Memory_read_o_3 <= Memory_read_i_3;
-	Data1_o <= Data1_i;
-	mux7_output_data_o <= mux7_output_data_i;
-	RDaddr_o <= RDaddr_i;
+   if(stall_i) begin
+      RegWrite_o_3 <= RegWrite_o_3;
+      MemtoReg_o_3 <= MemtoReg_o_3;	
+      Memory_write_o_3 <= Memory_write_o_3;
+      Memory_read_o_3 <= Memory_read_o_3;
+      Data1_o <= Data1_o;
+      mux7_output_data_o <= mux7_output_data_o;
+      RDaddr_o <= RDaddr_o;
+   end
+   else begin
+      RegWrite_o_3 <= RegWrite_i_3;
+      MemtoReg_o_3 <= MemtoReg_i_3;	
+      Memory_write_o_3 <= Memory_write_i_3;
+      Memory_read_o_3 <= Memory_read_i_3;
+      Data1_o <= Data1_i;
+      mux7_output_data_o <= mux7_output_data_i;
+      RDaddr_o <= RDaddr_i;
+   end
 end
 
 endmodule
