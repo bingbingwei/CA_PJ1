@@ -27,11 +27,11 @@ reg	   [4:0]  RDaddr_o;
 
 always @(posedge clk_i) begin
    if(stall_i) begin
-      RegWrite_o_4 <= RegWrite_o_4;
-      MemtoReg_o_4 <= MemtoReg_o_4;
-      Data1_o <= Data1_o;
-      Data2_o <= Data2_o;
-      RDaddr_o <= RDaddr_o;
+      RegWrite_o_4 <= 0;
+      MemtoReg_o_4 <= 0;
+      Data1_o <= 0;
+      Data2_o <= 0;
+      RDaddr_o <= 0;
    end
    else begin
       RegWrite_o_4 <= RegWrite_i_4;

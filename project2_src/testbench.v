@@ -143,8 +143,17 @@ always@(posedge Clk) begin
 	if(counter > 150) begin	// stop 
 		$stop;
 	end
-		
+   
 	$fdisplay(outfile, "cycle = %d, Start = %b", counter, Start);
+   
+   $fdisplay(outfile, "stall = %b", CPU.cache_stall);
+
+   $fdisplay(outfile, "mux7 data1 : %h", CPU.mux7.data1_i);
+   $fdisplay(outfile, "mux7 data2 : %h", CPU.mux7.data2_i);
+   $fdisplay(outfile, "mux7 data3 : %h", CPU.mux7.data3_i);
+   $fdisplay(outfile, "mux7 output : %h", CPU.mux7.data_o);
+
+
    // print PC
    $fdisplay(outfile, "PC = %d", CPU.PC.pc_o);
 	// print Registers
@@ -171,8 +180,11 @@ always@(posedge Clk) begin
 	
 	$fdisplay(outfile, "\n");
 	
-	// print Data Cache Status
-	if(CPU.dcache.p1_stall_o && CPU.dcache.state==0) begin
+   // print Data Cache Status
+	//$fdisplay(outfile2, "stage3 output write data: %h", CPU.Stage3_WriteData_o);
+	//$fdisplay(outfile2, "dcache input addr: %h", CPU.dcache.p1_addr_i);
+	//$fdisplay(outfile2, "dcache input data: %h", CPU.dcache.p1_data_i);
+   if(CPU.dcache.p1_stall_o && CPU.dcache.state==0) begin
       if(CPU.dcache.sram_dirty) begin
 			if(CPU.dcache.p1_MemWrite_i) 
 				$fdisplay(outfile2, "Cycle: %d, Write Miss, Address: %h, Write Data: %h (Write Back!)", counter, CPU.dcache.p1_addr_i, CPU.dcache.p1_data_i);

@@ -200,7 +200,7 @@ Forwarding_Unit Forwarding_Unit(
     .ID_RSaddr_i(inst[25:21]),
     .ID_RTaddr_i(inst[20:16]),
     .Stage4_RegWrite_i(Stage4_RegWrite_o),
-    .Stage3_RegWrite_i(Stage4_RegWrite_o),
+    .Stage3_RegWrite_i(Stage3_RegWrite_o),
     .mux7_o(Forwarding_Unit_mux7_o),
     .mux6_o(Forwarding_Unit_mux6_o),
     .mux9_o(Forwarding_Unit_mux9_o),

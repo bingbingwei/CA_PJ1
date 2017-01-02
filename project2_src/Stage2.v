@@ -55,20 +55,6 @@ input         stall_i;
 
 always @(posedge clk_i)begin
    if(stall_i) begin
-      RegWrite_o_2 <= RegWrite_o_2;
-      MemtoReg_o_2 <= MemtoReg_o_2;	
-      Memory_write_o_2 <= Memory_write_o_2;
-      Memory_read_o_2 <= Memory_read_o_2;
-      ALUSrc_o_2 <= ALUSrc_o_2;
-      RegDst_o_2 <= RegDst_o_2;
-      ALUOp_o_2 <= ALUOp_o_2;
-      RSdata_o <= RSdata_o;
-      RTdata_o <= RTdata_o;
-      Sign_extend_o <= Sign_extend_o;
-      RSaddr_o <= RSaddr_o;
-      RTaddr_o <= RTaddr_o;
-      RDaddr_o <= RDaddr_o;
-      funct_o <= funct_o;
    end
    else begin
       RegWrite_o_2 <= RegWrite_i_2;
